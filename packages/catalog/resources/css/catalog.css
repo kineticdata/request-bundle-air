@@ -13,7 +13,7 @@
 /**
  * Preview of templates
  */
-#preview {
+#preview, #previewLoader {
    width: 563px;
    margin: 22px 0px 0px 10px;
    float: left;

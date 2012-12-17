@@ -12,6 +12,39 @@
     // that they are available.  Preloading all of the related objects at once
     // is more efficient than loading them individually.
     catalog.preload(context);
+
+    // Build a Map that maps the category id to the template id of its
+    // description template.  Description templates are categorized within the
+    // category and have a configured attribute that specifies it as a
+    // description template. 
+    Map<String, String> categoryDescriptions = new java.util.HashMap<String, String>();
+    for (Category category : catalog.getAllCategories(context)) {
+        for (Template template : category.getTemplates()) {
+            if (template.getTemplateAttributeValues("IsDescription").length > 0) {
+                categoryDescriptions.put(category.getId(), template.getId());
+            }
+        }
+    }
+    
+    // Build a Map that maps template names to template ids.  This is used when
+    // building links to description templates which are stored as attributes
+    // where the value is the template name of the description template.
+    Map<String, String> templateIds = new java.util.HashMap<String, String>();
+    for (Template template : catalog.getTemplates(context)) {
+        templateIds.put(template.getName(), template.getId());
+    }
+    
+    // Build a Map that maps a template to its template description.  Both
+    // values are the ids of the respective templates.
+    Map<String, String> templateDescriptions = new java.util.HashMap<String, String>();
+    for (Template template : catalog.getTemplates(context)) {
+        String[] values = template.getTemplateAttributeValues("HasDescription");
+        if (values.length == 1) {
+            templateDescriptions.put(template.getId(),templateIds.get(values[0]));
+        } else if (values.length > 1) {
+            throw new RuntimeException("HasDescription attribute should not have multiple values.");
+        }
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -62,7 +95,7 @@
                         <% for (Category category : catalog.getRootCategories(context)) { %>
                             <% if (category.hasTemplates()) { %>
                             <div class="category" data-id="<%= category.getId()%>" data-name="<%= category.getName()%>">
-                                <div class="name navigation">
+                                <div class="name navigation" data-description-id="<%= categoryDescriptions.get(category.getId()) %>">
                                   <span class="arrow">></span>  <%= category.getName()%> 
                                 </div>                            
                                 <div class="description hidden">
@@ -74,6 +107,11 @@
                     </div>
                 </div>
                 <div id="preview">
+                </div>
+                <div id="previewLoader" class="hidden">
+                    <img alt="Please Wait." src="<%=bundle.bundlePath()%>common/resources/images/spinner.gif" />
+                    <br />
+                    Loading Description
                 </div>
             </div>
             <%-- SUBMISSIONS VIEW --%>
@@ -127,7 +165,7 @@
         <% for (Category category : catalog.getRootCategories(context)) { %>
             <% if (category.hasTemplates()) { %>
             <div class="category" data-id="<%= category.getId()%>" data-name="<%= category.getName()%>">
-                <div class="name navigation">
+                <div class="name navigation" data-description-id="<%= categoryDescriptions.get(category.getId()) %>">
                     <span class="arrow">></span> <%= category.getName()%>
                 </div>
                 <div class="description hidden">
@@ -141,7 +179,7 @@
         <% for (Category category : catalog.getAllCategories(context)) {%>
             <% if (category.hasTemplates()) { %>
             <div class="category hidden" id="<%= category.getId()%>">
-                <div class="name navigation">
+                <div class="name navigation" data-description-id="<%= categoryDescriptions.get(category.getId()) %>">
                     <%= category.getName()%>
                 </div>
                 <div class="description hidden"><%= category.getDescription()%></div>
@@ -151,7 +189,7 @@
                     <% for (Category subcategory : category.getSubcategories()) { %>
                         <% if (subcategory.hasTemplates()) { %>
                         <div class="category" data-id="<%= subcategory.getId()%>" data-name="<%= subcategory.getName()%>">
-                            <div class="name navigation">
+                            <div class="name navigation" data-description-id="<%= categoryDescriptions.get(category.getId()) %>">
                                 <span class="arrow">></span> <%= subcategory.getName()%>
                             </div>
                             <div class="description hidden">
@@ -168,7 +206,7 @@
                 <div class="templates hidden">
                     <% for (Template template : category.getTemplates()) {%>
                     <div class="template">
-                        <div class="name navigation">
+                        <div class="name navigation" data-description-id="<%= templateDescriptions.get(template.getId())%>">
                             <%= template.getName()%>
                         </div>
                         <div class="description hidden">

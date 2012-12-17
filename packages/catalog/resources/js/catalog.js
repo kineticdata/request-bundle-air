@@ -262,8 +262,27 @@ jQuery(document).ready(function() {
        jQuery('.template').removeClass('textGreen');
        jQuery('.category').removeClass('textGreen');
        jQuery(element).addClass('textGreen');
-       var currentCategoryDescription = jQuery(element).find('.description').html();
-       jQuery(preview).html(currentCategoryDescription);
+       var descriptionId = jQuery(element).find(".name.navigation").data("description-id");
+       if ( descriptionId ) {
+           jQuery(preview).empty();
+           jQuery("#previewLoader").show();
+           BUNDLE.ajax({
+               cache: false,
+               type: "GET",
+               url: "/kinetic/DisplayPage?srv=" + descriptionId,
+               success: function(data, textStatus, jqXHR) {
+                   jQuery("#previewLoader").hide();
+                   jQuery(preview).html(data);
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+                   jQuery("#previewLoader").hide();
+                   jQuery(preview).html("Could not load description.")
+               }
+           });
+       } else {
+           var description = jQuery(element).find('.description').html();
+           jQuery(preview).html(description);
+       }
    }
 
    /**
