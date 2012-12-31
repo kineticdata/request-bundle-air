@@ -254,6 +254,7 @@ jQuery(document).ready(function() {
        jQuery('#categoriesNavHeader').hide();
    }
 
+   var descriptions = {};
    /**
     * This function will display template and category descriptions
     * @author Andre Crouch
@@ -263,22 +264,39 @@ jQuery(document).ready(function() {
        jQuery('.category').removeClass('textGreen');
        jQuery(element).addClass('textGreen');
        var descriptionId = jQuery(element).find(".name.navigation").data("description-id");
-       if ( descriptionId ) {
+       if (descriptionId) {
            jQuery(preview).empty();
-           jQuery("#previewLoader").show();
-           BUNDLE.ajax({
-               cache: false,
-               type: "GET",
-               url: "/kinetic/DisplayPage?srv=" + descriptionId,
-               success: function(data, textStatus, jqXHR) {
-                   jQuery("#previewLoader").hide();
-                   jQuery(preview).html(data);
-               },
-               error: function(jqXHR, textStatus, errorThrown) {
-                   jQuery("#previewLoader").hide();
-                   jQuery(preview).html("Could not load description.")
+           if (descriptions[descriptionId] === undefined) {
+               jQuery("#previewLoader").show();
+               BUNDLE.ajax({
+                   cache: false,
+                   type: "GET",
+                   url: "/kinetic/DisplayPage?srv=" + descriptionId + "&tzOffset=" + escape((new Date()).getTimezoneOffset()),
+                   success: function(data, textStatus, jqXHR) {
+                       var descriptionContent = jQuery(data);
+                       descriptionContent.find(".templateButton").remove();
+                       descriptions[descriptionId] = descriptionContent;
+                       jQuery("#previewLoader").hide();
+                       jQuery(preview).append(descriptionContent);
+                       if (jQuery(element).hasClass("template")) {
+                           jQuery(preview).append(jQuery(element).find(".templateButton").clone());
+                       }
+                   },
+                   error: function(jqXHR, textStatus, errorThrown) {
+                       // A 401 response will be handled by the BUNDLE.ajax function
+                       // so we will not handle that response here.
+                       if ( jqXHR.status !== 401 ) {
+                           jQuery("#previewLoader").hide();
+                           jQuery(preview).html("Could not load description.")
+                       }
+                   }
+               });
+           } else {
+               jQuery(preview).append(descriptions[descriptionId]);
+               if (jQuery(element).hasClass("template")) {
+                   jQuery(preview).append(jQuery(element).find(".templateButton").clone());
                }
-           });
+           }
        } else {
            var description = jQuery(element).find('.description').html();
            jQuery(preview).html(description);
