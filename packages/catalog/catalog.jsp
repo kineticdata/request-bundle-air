@@ -187,7 +187,7 @@
                     <% for (Category subcategory : category.getSubcategories()) { %>
                         <% if (subcategory.hasTemplates()) { %>
                         <div class="category" data-id="<%= subcategory.getId()%>" data-name="<%= subcategory.getName()%>">
-                            <div class="name navigation" data-description-id="<%= categoryDescriptions.get(category.getId()) %>">
+                            <div class="name navigation" data-description-id="<%= categoryDescriptions.get(subcategory.getId()) %>">
                                 <span class="arrow">></span> <%= subcategory.getName()%>
                             </div>
                             <div class="description hidden">
@@ -203,6 +203,7 @@
                 <% if (category.hasTemplates()) {%>
                 <div class="templates hidden">
                     <% for (Template template : category.getTemplates()) {%>
+                    <% if (!(template.getTemplateAttributeValues("IsDescription").length > 0)) { %>
                     <div class="template">
                         <div class="name navigation" data-description-id="<%= templateDescriptions.get(template.getId())%>">
                             <%= template.getName()%>
@@ -212,6 +213,7 @@
                             <a class="templateButton" href="<%= pathHelper.templateUrl(template.getId())%>">Request</a>
                         </div>
                     </div>
+                    <% }%>
                     <% }%>
                 </div>
                 <% }%>
