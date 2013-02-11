@@ -49,6 +49,18 @@
             this.entry = entry;
         }
 
+        public Category getCategoryByName(String name) {
+          return sortedCategoryMap.get(name);
+        }
+
+        public Template getTemplateById(String id) {
+          return templateIdMap.get(id);
+        }
+
+        public Template getTemplateByName(String name) {
+          return templateNameMap.get(name);
+        }
+
         public static Catalog findByName(HelperContext context, String name) {
             Catalog catalog = null;
             

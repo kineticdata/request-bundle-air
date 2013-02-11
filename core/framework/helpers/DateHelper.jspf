@@ -43,6 +43,34 @@
         }
 
         /**
+         * Given a user-defined pattern, returns a date/time string formatted 
+         * for the specified locale.  
+         * 
+         * @param String dateString
+         * @param java.net.Locale
+         * @param String datePattern
+         * @returns String
+         *
+         * Note: A date/time string from an AR System Bridge will look like this:
+         *      2013-01-22T21:18:13+0000
+         * So the pattern will be:
+         *      yyyy-MM-dd'T'HH:mm:ssZ
+         *
+         */
+        public static String formatDate(String dateString, Locale locale, String datePattern) {
+            String result = null;
+            try {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
+                Date date = simpleDateFormat.parse(dateString);
+                DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, locale);
+                result = dateFormat.format(date);
+            } catch (Exception e) {
+                throw new RuntimeException("Unable to format date: "+dateString, e);
+            }
+            return result;
+        }
+
+        /**
          * Returns the current four digit year value as a string.
          * @returns String
          */
@@ -50,6 +78,20 @@
             java.util.Calendar calendar = java.util.Calendar.getInstance();
             int year = calendar.get(java.util.Calendar.YEAR);
             return String.valueOf(year);
+        }
+
+        /**
+         * Returns the current date and time.
+         * @param java.net.Locale
+         * @returns String
+         */
+        public static String getCurrentDateTime(Locale locale) {
+            String result = null;
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT_SIMPLE);
+            Date date = new Date();
+            DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, locale);
+            result = dateFormat.format(date);
+            return result;
         }
     }
 %>

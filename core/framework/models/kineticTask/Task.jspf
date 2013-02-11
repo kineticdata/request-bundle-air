@@ -48,6 +48,10 @@
             return messages;
         }
 
+        public boolean hasMessages() {
+            return messages.length > 0;
+        }
+
         public String getCreateDate() {return entry.getEntryFieldValue(FIELD_CREATE_DATE);}
         public String getId() {return entry.getEntryFieldValue(FIELD_ID);}
         public String getModifiedDate() {return entry.getEntryFieldValue(FIELD_MODIFIED_DATE);}
