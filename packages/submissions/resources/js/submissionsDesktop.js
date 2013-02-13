@@ -55,6 +55,8 @@ $(document).ready(function() {
             });
         },
         tableCompleteCallback: function(table, element) {
+            // Remove all delegated click handlers from all rows
+            $(table.container).off('click', 'tr');
             $(table.container).on('click', 'tr', function() {
                 window.open($(this).data('csrv'));
             }); 
