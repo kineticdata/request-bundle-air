@@ -36,9 +36,6 @@ $(document).ready(function() {
             refreshTableControls();
             $(loader).hide();
             $('#submissionsTable').show();
-            $(table).on('click', 'tr', function() {
-                console.log($(this).data('csrv'));
-            })
             
         },
         // This callback function binds a click event to each of the header
@@ -56,8 +53,8 @@ $(document).ready(function() {
         },
         tableCompleteCallback: function(table, element) {
             // Remove all delegated click handlers from all rows
-            $(table.container).off('click', 'tr');
-            $(table.container).on('click', 'tr', function() {
+            $(table.container).off('click', 'tr.kd-row');
+            $(table.container).on('click', 'tr.kd-row', function() {
                 window.open($(this).data('csrv'));
             }); 
         }
