@@ -36,6 +36,10 @@ $(document).ready(function() {
             refreshTableControls();
             $(loader).hide();
             $('#submissionsTable').show();
+            $(table).on('click', 'tr', function() {
+                console.log($(this).data('csrv'));
+            })
+            
         },
         // This callback function binds a click event to each of the header
         // cells that when clicked it either sorts the table by that field or
@@ -49,19 +53,22 @@ $(document).ready(function() {
                     table.toggleSort();
                 }
             });
+        },
+        tableCompleteCallback: function(table, element) {
+            $(table.container).on('click', 'tr', function() {
+                window.open($(this).data('csrv'));
+            }); 
         }
     }
-    
+
     /*
      * Define the cell callback function for the open and closed requests table.
      * If the cell is displaying a request id instead of the normal text we will
      * create a link for submission details.
      */
-    function requestsOpenClosedCellCallback(table, element, rowData, rowIndex, cellData, cellIndex) {
-        if (cellIndex == table.getIndex('Request Id')) {
-            var anchor = '<a href="'+BUNDLE.config['submissionDetailsUrl']+'&submissionId=' + rowData[table.getIndex('Instance Id')] +'">' + cellData + '</a>';
-            jQuery(element).html(anchor);
-        }
+    function requestsOpenClosedCellCallback(table, rowElement, rowData, rowIndex) {
+        var url = BUNDLE.config['submissionDetailsUrl']+'&submissionId=' + rowData[table.getIndex('Instance Id')];
+        $(rowElement).data('csrv', url);
     }
     
     /*
@@ -94,7 +101,7 @@ $(document).ready(function() {
         "Requests Open": new Table($.extend(tableOptions, {
             container: '#tableContainerRequestsOpen',
             qualification: 'Requests Open',
-            cellCallback: requestsOpenClosedCellCallback,
+            rowCallback: requestsOpenClosedCellCallback,
             initialize: false
         })),
         "Requests Closed": new Table($.extend(tableOptions, {
