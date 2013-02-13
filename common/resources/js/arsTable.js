@@ -18,6 +18,7 @@ function Table(options) {
     this.headerCallback = options['headerCallback'];
     this.rowCallback = options['rowCallback'];
     this.cellCallback = options['cellCallback'];
+    this.tableCompleteCallback = options['tableCompleteCallback'];
     if(options.initialize !== false) {
         this.refresh();
     };
@@ -225,6 +226,9 @@ Table.prototype.redraw = function() {
     }
     jQuery(this.container).empty();
     jQuery(this.container).append(table);
+    if (this.tableCompleteCallback != undefined) {
+        this.tableCompleteCallback(this, table);
+    }
 }
 
 //Table.prototype.redraw = function () {
