@@ -1,22 +1,37 @@
 <header class="contentHeader">
     <%-- THIS COMPENSATES FOR STICKY ELEMENTS USED IN CATALOG. --%>
     <div class="graySpacer"></div>
-    <div class="headerContainer">
-        <a href="<%= bundle.getProperty("homeUrl")%>">
+    <div class="container containerBorderTop">
+        <a href="<%= bundle.getProperty("catalogUrl")%>">
             <img alt="<%= bundle.getProperty("companyName") %>" class="logoHeader" src="<%= bundle.bundlePath()%>common/resources/images/logo.png" />
         </a>
-        <% if (context != null) {%>
-        <div class="userInfo" style="float: left; margin: 0px 0px 0px 80px; cursor: default;">
-        <% if(bundle.getProperty("profileUrl") != null ) { %>
-            <a href="<%= bundle.getProperty("profileUrl")%>">Welcome <%= context.getUserName()%></a>
-        <% } else { %>
-            Welcome <%= context.getUserName()%>
-        <% } %>
-        </div>
-        <div class="userInfo" style="float: right; margin: 0px 10px 0px 0px;">
-            <a href="<%= bundle.getProperty("logoutUrl")%>">logout</a>
-        </div>
-        <% } %>
-        <div class="clearfix"></div>
+        <ul class="headerNav">
+            <% if (context != null) {%>
+                <li class="userInfo">
+                    <% if(bundle.getProperty("profileUrl") != null ) { %>
+                        <a href="<%= bundle.getProperty("profileUrl")%>">Welcome <%= context.getUserName()%></a>
+                    <% } else { %>
+                        Welcome <%= context.getUserName()%>
+                    <% } %>
+                </li>
+            <% } %>
+            <li class="mobileChoice">
+                <% if(bundle.getProperty("reviewMode").equals("true")) {%>
+                <form method="post" action="<%= bundle.applicationPath()%>ReviewRequest?<%= request.getQueryString()%>">
+                <% } else {%>
+                <form method="post" action="<%= bundle.applicationPath()%>DisplayPage?<%= request.getQueryString()%>">
+                <% }%>
+                    <label>
+                        <input type="checkbox" name="mobile" value="true" />
+                        Mobile
+                    </label>
+                </form>
+            </li>
+            <% if (context != null) {%>
+                <li class="logout">
+                    <a href="<%= bundle.getProperty("logoutUrl")%>">logout</a>
+                </li>
+            <% } %>
+        </ul>
     </div>
 </header>

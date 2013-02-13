@@ -1,0 +1,24 @@
+<div class="clearfix"></div>
+<footer role="contentinfo" class="clearfix">
+    <div class="wrapper">
+        <nav>
+            <ul>
+                <li>
+                    <a href="http://www.kineticdata.com/">
+                        Kinetic Data
+                    </a>
+                </li> 
+                <li>
+                    <a href="http://community.kineticdata.com/">
+                        Kinetic Community
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.kineticdata.com/AboutUs/ContactUs.html">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</footer>

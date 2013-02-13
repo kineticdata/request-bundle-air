@@ -36,4 +36,6 @@
 #loader {
     text-align: center;
     margin: 20px;
+    width: auto;
+    float: none;
 }

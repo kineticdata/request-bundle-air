@@ -1,0 +1,6 @@
+<%--
+    Package specific config
+--%>
+<%
+    bundle.setProperty("submissionDetailsUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_SubmissionDetails");
+%>

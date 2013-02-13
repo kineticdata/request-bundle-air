@@ -6,38 +6,24 @@
 
 <%-- Include the package initialization file. --%>
 <%@include file="framework/includes/packageInitialization.jspf"%>
-
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <title><%= customerRequest.getTemplateName()%></title>
-        <%-- Include the application head content. --%>
-        <%@include file="../../core/interface/fragments/applicationHeadContent.jspf" %>
-        <%@include file="../../core/interface/fragments/reviewHeadContent.jspf"%>
-
-        <%-- Include the bundle common content. --%>
-        <%@include file="../../common/interface/fragments/headContent.jspf"%>
-
-        <!-- Page Stylesheets -->
-        <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/display.css" type="text/css" />
-        <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/review.css" type="text/css" />
-        <!-- Page Javascript -->
-        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/display.js"></script>
-
-        <%-- Include the form head content, including attached css/javascript files and custom header content --%>
-        <%@include file="../../core/interface/fragments/formHeadContent.jspf"%>
-    </head>
-
-    <body class="loadAllPages_<%=customerSurveyReview.getLoadAllPages()%> review">
-        <%@include file="../../core/interface/fragments/contentHeader.jspf"%>
-        <div class="container">
-            <div id="contentBody">
-                <div id="reviewBorder">
-                    <%@include file="../../core/interface/fragments/reviewBodyContent.jspf"%>
-                </div>
-            </div>
-        </div>
-        <%@include file="../../common/interface/fragments/contentFooter.jspf"%>
-    </body>
-</html>
+<%
+    // Mobile Check
+    Boolean isMobile = false;
+    if(request.getParameter("mobile") != null) {
+        isMobile = Boolean.valueOf(request.getParameter("mobile"));
+        if(isMobile) {
+            CookieHelper.setCookieValue(response, "mobile", "true");
+        } else {
+            CookieHelper.setCookieValue(response, "mobile", "false");
+        }
+    } else if(CookieHelper.getCookieValue(request, "mobile") != null) {
+        isMobile = Boolean.valueOf(CookieHelper.getCookieValue(request, "mobile"));
+    } else {
+        isMobile = MobileDetectionHelper.isMobile(request);
+    }
+%>
+<% if(isMobile) { %>
+    <%@include file="interface/fragments/reviewMobile.jspf"%>
+<% } else { %>
+    <%@include file="interface/fragments/reviewDesktop.jspf"%>
+<% }%>

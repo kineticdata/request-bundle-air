@@ -4,23 +4,41 @@
     NOTE: This file is required.
 --%>
 <%
-    bundle.setProperty("companyName", "Air");
-    bundle.setProperty("catalogName", "Air");
+    bundle.setProperty("companyName", "ACME2");
+    bundle.setProperty("catalogName", "ACME2");
 
-    bundle.setProperty("homeUrl", bundle.applicationPath() + "DisplayPage?name=AirCatalog");
-    bundle.setProperty("loginUrl", bundle.applicationPath() + "DisplayPage?name=AirLogin");
-    bundle.setProperty("profileUrl", bundle.applicationPath() + "DisplayPage?name=UserProfile");
+    bundle.setProperty("catalogUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_Catalog");
+    bundle.setProperty("loginUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_Login");
+    bundle.setProperty("profileUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_UserProfile");
+    bundle.setProperty("searchUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_Search");
+    bundle.setProperty("submissionsUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_Submissions");
+
+    bundle.setProperty("searchNameParam", "ACME2_Search");
     bundle.setProperty("logoutUrl", "KSAuthenticationServlet?Logout=true");
 
     java.util.Map<String,String> submissionGroups = new java.util.LinkedHashMap();
     if (context != null) {
-        submissionGroups.put("Requests Parked",     "'ApplicationName'=\"Kinetic Request\" AND 'Category'=\""+bundle.getProperty("catalogName")+"\" AND 'Status'=\"In Progress\" AND 'Request_Status'=\"Open\" AND 'Submit Type'=$NULL$ AND 'Submitter'=\""+context.getUserName()+"\"");
-        submissionGroups.put("Requests Open",       "'ApplicationName'=\"Kinetic Request\" AND 'Category'=\""+bundle.getProperty("catalogName")+"\" AND 'Status'=\"Completed\" AND 'Request_Status'=\"Open\" AND 'Submit Type'=$NULL$ AND 'Submitter'=\""+context.getUserName()+"\"");
-        submissionGroups.put("Requests Closed",     "'ApplicationName'=\"Kinetic Request\" AND 'Category'=\""+bundle.getProperty("catalogName")+"\" AND 'Request_Status'=\"Closed\" AND 'Submit Type'=$NULL$ AND 'Submitter'=\""+context.getUserName()+"\"");
-        submissionGroups.put("Approvals Pending",   "'ApplicationName'=\"Kinetic Request\" AND 'Category'=\""+bundle.getProperty("catalogName")+"\" AND 'Request_Status'=\"Open\" AND 'Submit Type'=\"Approval\" AND 'Submitter'=\""+context.getUserName()+"\"");
+        submissionGroups.put("Requests Parked", "'ApplicationName'=\"Kinetic Request\" AND 'Category'=\""+bundle.getProperty("catalogName")+"\" AND 'Status'=\"In Progress\" AND 'Request_Status'=\"Open\" AND 'Submit Type'=$NULL$ AND 'Submitter'=\""+context.getUserName()+"\"");
+        submissionGroups.put("Requests Open", "'ApplicationName'=\"Kinetic Request\" AND 'Category'=\""+bundle.getProperty("catalogName")+"\" AND 'Status'=\"Completed\" AND 'Request_Status'=\"Open\" AND 'Submit Type'=$NULL$ AND 'Submitter'=\""+context.getUserName()+"\"");
+        submissionGroups.put("Requests Closed", "'ApplicationName'=\"Kinetic Request\" AND 'Category'=\""+bundle.getProperty("catalogName")+"\" AND 'Request_Status'=\"Closed\" AND 'Submit Type'=$NULL$ AND 'Submitter'=\""+context.getUserName()+"\"");
+        submissionGroups.put("Approvals Pending", "'ApplicationName'=\"Kinetic Request\" AND 'Category'=\""+bundle.getProperty("catalogName")+"\" AND 'Request_Status'=\"Open\" AND 'Submit Type'=\"Approval\" AND 'Submitter'=\""+context.getUserName()+"\"");
         submissionGroups.put("Approvals Completed", "'ApplicationName'=\"Kinetic Request\" AND 'Category'=\""+bundle.getProperty("catalogName")+"\" AND 'ApplicationName'=\"Kinetic Request\" AND 'Request_Status'=\"Closed\" AND 'Submit Type'=\"Approval\" AND 'Submitter'=\""+context.getUserName()+"\"");
     }
 
     // This is a path to the review jsp to be used by review request.
     bundle.setProperty("reviewJsp", bundle.relativeBundlePath() + "packages/base/review.jsp");
+
+    // Review mode is used in the form for switching between mobile and desktop
+    bundle.setProperty("reviewMode", "false");
+    if (request.getParameter("reviewPage") != null) {
+         bundle.setProperty("reviewMode", "true");
+    }
+
+    // Approval count is needed to control UI visibility for submissions
+    if (context != null) {
+        for (String groupName : submissionGroups.keySet()) {
+            Integer count = ArsBase.count(context, "KS_SRV_CustomerSurvey_base", submissionGroups.get(groupName));
+            bundle.setProperty(groupName + " Count", Integer.toString(count));
+        }
+    }
 %>

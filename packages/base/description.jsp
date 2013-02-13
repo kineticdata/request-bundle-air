@@ -4,4 +4,6 @@
 <%-- Include the package initialization file. --%>
 <%@include file="framework/includes/packageInitialization.jspf"%>
 
+<!-- Page Stylesheets -->
+<link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/description.css" type="text/css" />
 <%@include file="../../core/interface/fragments/displayBodyContent.jspf"%>

@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            <%= bundle.getProperty("companyName")%>&nbsp;My Requests
+        </title>
+        <%-- Include the common content. --%>
+        <%@include file="../../../../common/interface/fragments/headContentMobile.jspf"%>
+
+        <!-- Page Stylesheets -->
+        <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/submissionsMobile.css" type="text/css" />
+        <!-- Page Javascript -->
+        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/ArsTable.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/responsiveTables.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/submissionsMobile.js"></script>
+        <!--[if lt IE 9]>
+        <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="container">
+            <%@include file="../../../../common/interface/fragments/contentHeaderMobile.jspf"%>
+            <div class="wrapper clearfix">
+                <section id="sidebar" class="catalog clearfix">
+                <!-- Normally the nav is located here -->
+                </section>
+                <section id="main" class="clearfix">
+                    <%-- LOADER --%>
+                    <div id="loader">
+                        <img alt="Please Wait." src="<%=bundle.bundlePath()%>common/resources/images/spinner.gif" />
+                        <br />
+                        Loading Results
+                    </div>
+                    <%-- SUBMISSIONS VIEW --%>
+                    <div id="submissionsTable" class="">
+                        <div>
+                             <table class="tableContainer responsive hidden" id="tableContainerRequestsOpen">
+                                <thead>
+                                    <tr>
+                                        <th>Request ID</th>
+                                        <th>Service Item</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div> 
+        <%@include file="../../../../common/interface/fragments/contentFooterMobile.jspf"%>
+    </body>
+</html>

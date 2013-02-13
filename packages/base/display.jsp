@@ -3,34 +3,24 @@
 
 <%-- Include the package initialization file. --%>
 <%@include file="framework/includes/packageInitialization.jspf"%>
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-        <title><%= customerRequest.getTemplateName()%></title>
-
-        <%-- Include the application head content. --%>
-        <%@include file="../../core/interface/fragments/applicationHeadContent.jspf"%>
-        <%@include file="../../core/interface/fragments/displayHeadContent.jspf"%>
-
-        <%-- Include the bundle common content. --%>
-        <%@include file="../../common/interface/fragments/headContent.jspf"%>
-
-        <!-- Page Stylesheets -->
-        <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/display.css" type="text/css" />
-        <!-- Page Javascript -->
-        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/display.js"></script>
-        <%-- Include the form head content, including attached css/javascript files and custom header content --%>
-        <%@include file="../../core/interface/fragments/formHeadContent.jspf"%>
-    </head>
-
-    <body>
-        <%@include file="../../core/interface/fragments/contentHeader.jspf"%>
-            <div class="container">
-                <%@include file="../../core/interface/fragments/displayBodyContent.jspf"%>
-                <div class="clearfix"></div>
-            </div>
-            <%@include file="../../common/interface/fragments/contentFooter.jspf"%>
-    </body>
-</html>
+<%
+    // Mobile Check
+    Boolean isMobile = false;
+    if(request.getParameter("mobile") != null) {
+        isMobile = Boolean.valueOf(request.getParameter("mobile"));
+        if(isMobile) {
+            CookieHelper.setCookieValue(response, "mobile", "true");
+        } else {
+            CookieHelper.setCookieValue(response, "mobile", "false");
+        }
+    } else if(CookieHelper.getCookieValue(request, "mobile") != null) {
+        isMobile = Boolean.valueOf(CookieHelper.getCookieValue(request, "mobile"));
+    } else {
+        isMobile = MobileDetectionHelper.isMobile(request);
+    }
+%>
+<% if(isMobile) { %>
+    <%@include file="interface/fragments/displayMobile.jspf"%>
+<% } else { %>
+    <%@include file="interface/fragments/displayDesktop.jspf"%>
+<% }%>

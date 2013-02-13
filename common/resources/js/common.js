@@ -1,3 +1,105 @@
+$(document).ready(function() {
+    $('header.contentHeader ul.headerNav li.mobileChoice form label input[type="checkbox"]').on('click', function() {
+        $(this).parent().parent().submit();
+    });
+    // Some Default states for dom elements
+    $('.infield').inFieldLabels();
+});
+
+// This jQuery method can be used to check the existance of dom elements
+jQuery.fn.exists = function() {
+    return this.length > 0;
+} 
+
+/**
+* StickyElement will make an element fixed based on the scroll position and parameters provided.
+* It also will return the element back to it's static position based on the scroll position and parameters provided.
+* 
+* @param selector string
+* @param topOffSet int
+* @param heightControlModifier int
+* @param marginTopFixed string
+* @param marginTopStatic string
+* @param marginLeftFixed string
+* @param marginLeftStatic string
+* @author Andre Crouch
+*/
+function stickyElement(selector, topOffSet, heightControlModifier, marginTopFixed, marginTopStatic, marginLeftFixed, marginLeftStatic) {
+   var obj = $(selector);
+   $(window).scroll(function() {
+       /**
+        * So here's the deal, if your browser window is too small, the sticky elements displays improperly.
+        * The scroll also acts very glithcy when the window is positioned so there is a minimal amount of scroll required.
+        * So to solve for these problems we need to know the total height of the sticky element
+        * The if statement checks if the total height is larger than the window height.
+        * If that's the case, the sticky object remains static.
+        */
+       if(obj.height() + heightControlModifier >= $(window).height()) {
+           obj.css({
+               marginTop: marginTopStatic,
+               marginLeft: marginLeftStatic,
+               position: 'static'
+           });
+       } else {
+           var scrollTop = $(window).scrollTop();
+           if (scrollTop < topOffSet){
+               obj.css({
+                   marginTop: marginTopStatic,
+                   marginLeft: marginLeftStatic,
+                   position: 'static'
+               });
+           }
+           if (scrollTop >= topOffSet){
+
+               obj.css({
+                   marginTop: marginTopFixed,
+                   marginLeft: marginLeftFixed,
+                   position: 'fixed'
+               });
+           }
+       }
+   });    
+}
+
+/**
+ * @return object url parameters
+ */
+function getUrlParameters() {
+  var searchString = window.location.search.substring(1)
+    , params = searchString.split("&")
+    , hash = {}
+    ;
+
+  for (var i = 0; i < params.length; i++) {
+    var val = params[i].split("=");
+    hash[unescape(val[0])] = unescape(val[1]);
+  }
+  return hash;
+}
+
+/**
+ * Live jQuery hover function used to display specific behavior when a user hovers over dhildren selector.
+ * The parent slector of the children are quired for the even to be live.
+ * @param parentSelector string
+ * @param childSelector string
+ * @param mouseEnter function
+ * @param mouseLeave function
+ */
+function hover(parentSelector, childSelector, mouseEnter, mouseLeave) {
+    $(parentSelector).on({
+        mouseenter: function() {
+            if(mouseEnter != null) {
+                mouseEnter(this);
+            }
+        },
+        mouseleave: function() {
+            if(mouseLeave != null) {
+                mouseLeave(this);
+            }
+        }
+    }, childSelector);
+}
+
 /**
  * @param email string
  * @param displaySelector string
