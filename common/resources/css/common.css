@@ -70,14 +70,14 @@ table.kd-table tr.kd-odd { background: #FFFFFF; }
 table.kd-table tr.kd-even td.kd-cell-sorting-descending,
 table.kd-table tr.kd-even td.kd-cell-sorting-ascending { background: #C4E1C4; }
 
-
-
 table.kd-table tr.kd-odd td.kd-cell-sorting-descending,
 table.kd-table tr.kd-odd td.kd-cell-sorting-ascending { background: #E3F0E3; }
 
-table.kd-table tr.kd-odd td.kd-highlight,
-table.kd-table tr.kd-even td.kd-highlight { background: #99CC99; color: #000000; }
-
+table.kd-table tr.kd-highlight td.kd-cell-sorting-descending,
+table.kd-table tr.kd-highlight td.kd-cell-sorting-ascending,
+table.kd-table tr.kd-highlight {
+    background: #99CC99; color: #000000;
+}
 table.kd-table th.kd-header-sorting-selected {
     background: #D6D6D7; /* Old browsers */
     background: -moz-linear-gradient(top,  #D6D6D7 0%, #e5e5e5 100%); /* FF3.6+ */
