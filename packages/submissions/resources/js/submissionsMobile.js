@@ -183,14 +183,7 @@ function requestsOpenClosedCompleteCallback(table, oSettings, json) {
     jQuery('#tableContainerRequestsOpen tbody').off('click', 'tr');
     // Click Event
     jQuery('#tableContainerRequestsOpen tbody').on('click', 'tr', function() {
-        window.open(BUNDLE.config['submissionDetailsUrl']+'&CSRV=' + jQuery(this).data('csrv'));
-    });
-
-    // Remove all delegated click handlers from all rows
-    jQuery('#tableContainerRequestsOpenTwo tbody').off('click', 'tr');
-    // Click Event
-    jQuery('#tableContainerRequestsOpenTwo tbody').on('click', 'tr', function() {
-        window.open(BUNDLE.config['submissionDetailsUrl']+'&CSRV=' + jQuery(this).data('csrv'));
+        window.open(BUNDLE.config['submissionDetailsUrl']+'&submissionId=' + jQuery(this).data('csrv'));
     });
 
     updateTables();
