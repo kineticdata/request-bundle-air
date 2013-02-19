@@ -125,7 +125,7 @@
                                  <div id="submissionCloseDate" class="detail" data-closed="<%= DateHelper.getCurrentDateTime(request.getLocale())%>">
                                      &nbsp;(<%= DateHelper.formatDate(submission.getCreateDate(), request.getLocale())%> - <%= DateHelper.getCurrentDateTime(request.getLocale())%>)
                                  </div> 
-                                 Elapsed Toatal Days and Elapsed Business Days
+                                 Elapsed Total Days and Elapsed Business Days
                             </div>
                         <% }%>
                         </li>
