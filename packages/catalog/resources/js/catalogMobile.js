@@ -5,10 +5,7 @@ $(document).ready(function() {
     var templatePreview = '#templatePreview';
     var categoriesNav = 'ul#categoriesNav';
     
-    /**
-     * This unobtrusive on click event displays the menus
-     * @author Andre Crouch
-     */
+    /* This unobtrusive on click event displays the menus */
     $(categoriesNav).on('click', 'li', function(event) {
         event.preventDefault();
         // Get current clicked category id and name
@@ -31,10 +28,7 @@ $(document).ready(function() {
         // Append new bread crumb to current list of bread crumbs
         $(breadCrumbsNav).append(breadCrumb);
     });
-    /**
-     * This unobtrusive on click event displays the template's information
-     * @author Andre Crouch
-     */
+    /* This unobtrusive on click event displays the template's information */
     $(templatesNav).on('click', 'li', function(event) {
         event.preventDefault();
         var templateName =  $(this).data('name');
@@ -47,10 +41,7 @@ $(document).ready(function() {
         $(breadCrumbsNav).append(breadCrumb);
     });
     
-    /**
-     * This unobtrusive on click event manages the view for bread crumbs, categories and templates.
-     * @author Andre Crouch
-     */
+    /* This unobtrusive on click event manages the view for bread crumbs, categories and templates. */
     $(breadCrumbsNav).on('click', 'li.breadcrumb', function(event) {
         event.preventDefault();
         $(templatePreview).empty();
