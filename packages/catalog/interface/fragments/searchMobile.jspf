@@ -7,6 +7,8 @@
         </title>
         <%-- Include the common content. --%>
         <%@include file="../../../../common/interface/fragments/headContentMobile.jspf"%>
+        <!-- Page Stylesheets -->
+        <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/searchMobile.css" type="text/css" />
     </head>
     <body>
         <div class="container">
