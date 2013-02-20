@@ -2,7 +2,7 @@
 
 /* START COLOR CONFIGURATION */
 
-/* Catalog Navigation */
+/* Catalog Package Navigation */
 .menuContainer ul li a { color: inherit; border-bottom: 1px solid rgba(0,0,0,.1); }
 .menuContainer ul li a:hover,
 .menuContainer a.backMenu:hover  { background-color: #DDD; }
@@ -12,6 +12,15 @@
 .menuContainer ul li a.arrow:hover { color: #111; background-color: rgba(0,153,0,0.1); }
 .menuContainer .templateButton { color: #666; background-color: #d3d3d3; }
 .menuContainer .templateButton:hover { color: #fff; background-color: #069; }
+
+/* Catalog Package Search */
+.search-header h1 span.sep { color: #bbb; }
+.search-header h1 em { color: #777; }
+.search-results li { background: #fff; }
+.search-results h1,
+.search-results p { color: #333; }
+.search-results p { color: #999; }
+.highlighted { background: yellow; color: #000; }
 
 /* END COLOR CONFIGURATION */
 /* --------------------------------------------------

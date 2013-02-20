@@ -1,37 +1,22 @@
+table { margin-bottom: 0; }
 table th { font-weight: bold; }
-table td, table th { padding: 9px 10px; text-align: left; }
-.ui-widget-header {
-    border: none;
+table td, table th { 
+    padding: 9px 10px; 
+    text-align: left;
+    position: relative; 
+    white-space: nowrap; 
+    overflow: hidden;
 }
-#main {
-    padding: 0;
-}
-.pinned {
-    display: none;
-}
-
+.ui-widget-header { border: none; }
+#main { padding: 0; }
 #tableContainerRequestsOpen_first,
 #tableContainerRequestsOpen_last,
-#tableContainerRequestsOpen_paginate span {
-    display: none;
-}
-
-.ui-buttonset .ui-button {
-    margin-left: 0;
-    margin-right: 0.9em;
-    padding: 5px;
-}
-
-.dropdown form  {
-    margin-bottom: 0;
-}
-
+#tableContainerRequestsOpen_paginate span { display: none; }
+.ui-buttonset .ui-button { margin-left: 0; margin-right: 0.9em; padding: 5px; }
+.dropdown form  { margin-bottom: 0; }
 .scrollable { 
     overflow: scroll; 
     overflow-y: hidden; 
     position: relative; 
     border-right: none;
 }
-
-table.responsive { margin-bottom: 0; }
-table.responsive td, table.responsive th { position: relative; white-space: nowrap; overflow: hidden; }
