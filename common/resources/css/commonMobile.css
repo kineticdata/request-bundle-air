@@ -1,3 +1,19 @@
+@charset "utf-8";
+
+/* START COLOR CONFIGURATION */
+
+/* Catalog Navigation */
+.menuContainer ul li a { color: inherit; border-bottom: 1px solid rgba(0,0,0,.1); }
+.menuContainer ul li a:hover,
+.menuContainer a.backMenu:hover  { background-color: #DDD; }
+.menuContainer a.backMenu { color: #111; background-color: #090; }
+.menuContainer a.backMenu:hover { color: #333; background-color: #090; }
+.menuContainer ul li a:hover,
+.menuContainer ul li a.arrow:hover { color: #111; background-color: rgba(0,153,0,0.1); }
+.menuContainer .templateButton { color: #666; background-color: #d3d3d3; }
+.menuContainer .templateButton:hover { color: #fff; background-color: #069; }
+
+/* END COLOR CONFIGURATION */
 /* --------------------------------------------------
  Table of Contents
 -----------------------------------------------------
@@ -9,7 +25,6 @@
 ::Logo
 ::Breadcrumbs
 ::Requests Open
-::Catalog Navigation
 ::Search
 ::Tables
 ::Helper classes
@@ -362,151 +377,6 @@ border-radius: 4px;
 background-color: #090;
 color: #fff;
 }
-
-/* ==========================================================================
-Catalog Navigation
-========================================================================== */
-
-.menuContainer {
-padding-bottom: 0;
-overflow-y: auto;
-overflow-x: hidden;
-position: relative;
-overflow: hidden;
-}
-.menuContainer ul {
-width: 100%;
-float: left;
-overflow: hidden;
-}
-.menuContainer ul li {
-width: auto;
-display: block;
-vertical-align: text-bottom;
-}
-
-.menuContainer ul li a.arrow {
-background: url(../images/arrow.png) no-repeat center right;
-width: 100%;
-}
-.menuContainer ul li a {
-padding: 15px 0;
-text-indent: 20px;
-display: block;
-float: left;
-position: relative;
-color: inherit;
-width: 100%;
-/* This makes the naviation unselectable and smoother user experience */
--webkit-touch-callout: none;
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-border-bottom: 1px solid rgba(0,0,0,.1);
-}
-.menuContainer ul li a:hover,
-.menuContainer a.backMenu:hover  {
-background: #DDD;
-}
-
-.menuContainer ul li a span {
-right: 10px;
-position: absolute;
-}
-
-.menuContainer a.backMenu {
-color: #333;
-}
-
-.menuContainer ul li ul {
-display: none;
-}
-
-.menuContainer ul li:after {
-content: ".";
-height: 0;
-clear: both;
-display: block;
-visibility: hidden;
-}
-.menuContainer ul {
-display: inline-block;
-}
-
-.menuContainer ul li a,
-.menuContainer ul li {
-background: transparent;
-}
-.menuContainer a.backMenu {
-padding-left: 0;
-padding-right: 0;
-margin-left: 0;
-margin-right: 0;
-color: #111;
-background: #090 url(../images/prev.png) no-repeat center left;
-width: 100%;
-text-align: center;
-}
-.menuContainer a.backMenu:hover {
-color: #333;
-background: #090;
-background: rgba(0,153,0,0.1) url(../images/prev.png) no-repeat center left;
-}
-
-.menuContainer ul li a:hover,
-.menuContainer ul li a.arrow:hover {
-color: #111;
-background: #090;
-background: rgba(0,153,0,0.1);
-}
-.menuContainer ul li a.arrow:hover {
-background-image: url(../images/arrow.png);
-background-position: center right ;
-background-repeat: no-repeat;
-}
-
-/* Bread crumbs */
-.menuContainer ul#breadcrumbs li.breadcrumb:not(:last-child) {
-display: none;
-}
-
-/* Request Button in menu container */
-.menuContainer .templateButton {
-float: left;
-margin: 0;
-padding: 7px 12px;
-font-size: 1em; /* 16 / 16 = 1 */
-font-weight: bold;
-text-decoration: none;
-color: #666;
-border: none;
-background: #d3d3d3;
--webkit-border-radius: 6px;
--moz-border-radius: 6px;
-border-radius: 6px;
-text-indent: 0;
-width: auto !important;
-}
-.menuContainer .templateButton:hover {
-color: #fff;
-background: #069;
-}
-
-/* Request Summary layout
-------------------------- */
-.requestSummary {
-padding: 20px;
-clear: both;
-}
-.requestSummary img {
-max-width: 60px;
-max-height: 45px;
-float:left;
-padding:10px 10px 0;
-}
-
 
 /* ==========================================================================
 Search
