@@ -12,10 +12,6 @@
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/catalogMobile.css" type="text/css" />
         <!-- Page Javascript -->
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/catalogMobile.js"></script>
-        <!--[if lt IE 9]>
-        <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
     </head>
     <body>
         <div class="container">
