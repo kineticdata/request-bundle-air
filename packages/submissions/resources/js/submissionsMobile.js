@@ -1,7 +1,8 @@
 // Load table on Page load
 $(document).ready(function() {
     var loader = '#loader';
-    var activeTable = null;
+    // Instantiate object
+    var arsUrl = new ArsUrl();
 
     var urlParameters = getUrlParameters();
     if(!urlParameters.status) {
@@ -9,7 +10,7 @@ $(document).ready(function() {
     }
     if(BUNDLE['config'][urlParameters.status+' Count'] > 0) {
         // Initialize datatables
-        intializeDataTable(tableParams, urlParameters.status);
+        intializeDataTable(tableParams, urlParameters.status, arsUrl);
         $(tableParams[urlParameters.status].container).show();
     } else {
         $(loader).hide();
@@ -17,92 +18,149 @@ $(document).ready(function() {
     }
 
     $('#status').text(urlParameters.status+' '+$('#status').text());
-
-    $('.dataTables_paginate').on('click', function(event) {
-        $("table.responsive").each(function(i, element) {
-            unsplitTable($(element));
-        });
-        $("table.responsive").each(function(i, element) {
-            splitTable($(element));
-        });
-    });
 });
 
 /**
- * Define the common table options that all of the tables on this page will
- * share.  Here we define the form the tables represent, the fields present,
- * the default sort field and order, the default page size and number.
+ * Define form defintions
  */
-var tableParams = {
-    form: "KS_SRV_CustomerSurvey_base",
-    fields: {
+formDefinitionDefault = {
+form: 'KS_SRV_CustomerSurvey_base', 
+fields: {
         'Request Id'   : '1',
         'Submitted'    : '700001285',
         'Service Item' : '700001000',
         'Status'       : '700002400',
-        'First Name'   : '300299800',
-        'Last Name'    : '700001806',
-        'Instance Id' : '179'
-    },
-    sortField: "Request Id",
-    sortOrder: 0,
-    pageSize: 0,
-    pageNumber: 0,
-    // Define table specific properties
-    "Requests Open": {
-        container: '#tableContainerRequestsOpen',
-        qualification: 'Requests Open',
-        rowCallback: defaultRowCallback,
-        completeCallback: requestsOpenClosedCompleteCallback
-    },
-    "Requests Closed": {
-        container: '#tableContainerRequestsClosed',
-        qualification: 'Requests Closed',
-        rowCallback: defaultRowCallback,
-        completeCallback: requestsOpenClosedCompleteCallback
-    },
-    "Requests Parked": {
-        container: '#tableContainerRequestsParked',
-        qualification: 'Requests Parked',
-        rowCallback: defaultRowCallback,
-        completeCallback: defaultCompleteCallback
-    },
-    "Approvals Pending": {
-        container: '#tableContainerApprovalsPending',
-        qualification: 'Approvals Pending',
-        rowCallback: defaultRowCallback,
-        completeCallback: defaultCompleteCallback
-    },
-    "Approvals Completed": {
-        container: '#tableContainerApprovalsCompleted',
-        qualification: 'Approvals Completed'
+        'Instance Id'  : '179'
     }
+};
+
+/**
+ * Define column defintions
+ */
+columnDefinitionsDefault = [
+    {
+        'aTargets': [0],
+        'sTitle': 'Request ID',
+        'iDataSort': formDefinitionDefault.fields['Request Id'],
+        'mRender': function (data, type, full) {
+            return full[0];                        
+        }                 
+    },
+    {
+        'aTargets': [1],
+        'sTitle': 'Service Item',
+        'iDataSort': formDefinitionDefault.fields['Service Item'],
+        'mRender': function (data, type, full) {
+            return full[2];                   
+        }                 
+    },
+    {
+        'aTargets': [2],
+        'sTitle': 'Status',
+        'iDataSort': formDefinitionDefault.fields['Status'],
+        'mRender': function (data, type, full) {
+            return full[3];                    
+        }                 
+    }
+];
+
+/**
+ * Default row callback, which will add csrv as a data attribute to each row
+ */
+function defaultRowCallback(table, nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+    $(nRow).data('csrv', aData[4]);
 }
 
-function intializeDataTable(tableParams, groupName) {
+/**
+ * Default complete callback, which will bind a unobtrusive jQuery live on click event.
+ * It uses the data attribute csrv as part of the url param in the link
+ */
+function defaultCompleteCallback(table, oSettings, json) {
+    // Remove all delegated click handlers from all rows
+    $('#testDataTable tbody').off('click', 'tr');
+    // Click Event
+    $('#testDataTable tbody').on('click', 'tr', function() {
+        window.open('/kinetic/DisplayPage?csrv=' + $(this).data('csrv'));
+    });
+}
+
+/**
+ * Custom complete callback, which will bind a unobtrusive jQuery live on click event.
+ * It uses the data attribute csrv as part of the url param in the link
+ */
+function requestsOpenClosedCompleteCallback(table, oSettings, json) {
+    // Remove all delegated click handlers from all rows
+    $('#tableContainerRequestsOpen tbody').off('click', 'tr');
+    // Click Event
+    $('#tableContainerRequestsOpen tbody').on('click', 'tr', function() {
+        window.open(BUNDLE.config['submissionDetailsUrl']+'&submissionId=' + $(this).data('csrv'));
+    });
+    $(loader).hide();
+    $(table.container).wrap('<div class="scrollable" />');
+}
+
+/**
+ * Define the common table options and callbacks
+ */
+tableParams = { 
+    // Define table specific properties
+    'Requests Open': {
+        container: '#tableContainerRequestsOpen',
+        qualification: 'Requests Open',
+        formDefinition: formDefinitionDefault,
+        columnDefinitions: columnDefinitionsDefault,
+        rowCallback: defaultRowCallback,
+        completeCallback: requestsOpenClosedCompleteCallback
+    },
+    'Requests Closed': {
+        container: '#tableContainerRequestsClosed',
+        qualification: 'Requests Closed',
+        formDefinition: formDefinitionDefault,
+        columnDefinitions: columnDefinitionsDefault,
+        rowCallback: defaultRowCallback,
+        completeCallback: requestsOpenClosedCompleteCallback
+    },
+    'Requests Parked': {
+        container: '#tableContainerRequestsParked',
+        qualification: 'Requests Parked',
+        formDefinition: formDefinitionDefault,
+        columnDefinitions: columnDefinitionsDefault,
+        rowCallback: defaultRowCallback,
+        completeCallback: defaultCompleteCallback
+    },
+    'Approvals Pending': {
+        container: '#tableContainerApprovalsPending',
+        qualification: 'Approvals Pending',
+        formDefinition: formDefinitionDefault,
+        columnDefinitions: columnDefinitionsDefault,
+        rowCallback: defaultRowCallback,
+        completeCallback: defaultCompleteCallback
+    },
+    'Approvals Completed': {
+        container: '#tableContainerApprovalsCompleted',
+        qualification: 'Approvals Completed',
+        formDefinition: formDefinitionDefault,
+        columnDefinitions: columnDefinitionsDefault,
+    }
+};
+
+/**
+ * Data tables
+ */
+function intializeDataTable(tableParams, groupName, arsUrl) {
     // Get table specific properties
     var table = tableParams[groupName];
-    // Instantiate object
-    var arsTable = new ArsTable();
     // Fluent interface to set properties and build url
-    arsTable.setForm(tableParams.form)                 
-            .setFields(tableParams.fields)
+    arsUrl.setForm(table.formDefinition.form)                 
+            .setFields(table.formDefinition.fields)
             .setFieldIds()
-            .setSortField(tableParams.sortField)
-            .setSortOrder(tableParams.sortOrder)
-            .setPageSize(tableParams.pageSize)
-            .setPageNumber(tableParams.pageNumber)
             .setQualification(table.qualification)
-            .setUrl(BUNDLE.bundlePath + 'common/interface/callbacks/arsTable.json.jsp');
+            .setUrl(BUNDLE.packagePath + 'interface/callbacks/dataTablesSubmissions.json.jsp');
         
-    // Hide elements
-    jQuery('#catalogContainer').hide(); 
-    jQuery('#submissionsTable').hide();
-    jQuery('.tableContainer').hide();
     // Datatable
-    jQuery(table.container).dataTable({
+    $(table.container).dataTable({
         'bPaginate': true,
-        'bSort': false,
+        'bSort': true,
         'bLengthChange': false,
         'bInfo': false,
         'bDestroy': true,
@@ -110,83 +168,34 @@ function intializeDataTable(tableParams, groupName) {
         'iDisplayStart': 0,
         'iDisplayLength': 5,
         'bJQueryUI': true,
-        'sAjaxDataProp': 'records',
-        'bProcessing': false,
-        //'bServerSide': true,
-        'sAjaxSource': arsTable.getUrl(),
+        'sAjaxDataProp': 'aaData',
+        'bProcessing': true,
+        'bServerSide': true,
+        'sAjaxSource': arsUrl.getUrl(),
         'sPaginationType': 'full_numbers',
+        'aaSorting': [[1, 'desc']],
         /**
          * ColumnDefs has many options for manipulation of column specific data
          * mRender can be used to render column data from json object
          */
-        'aoColumnDefs': [
-            {
-                'aTargets': [0],
-                'sName': 'Request ID',
-                'mRender': function (data, type, full) {
-                    return data;                        
-                }                 
-            },
-            {
-                'aTargets': [1],
-                'sName': 'Service Item',
-                'mRender': function (data, type, full) {
-                    return full[2];                       
-                }                 
-            },
-            {
-                'aTargets': [2],
-                'sName': 'Status',
-                'mRender': function (data, type, full) {
-                    return full[3];                    
-                }                 
-            }
-        ],
+        'aoColumnDefs': table.columnDefinitions,
+        'fnServerData': function (sSource, aoData, fnCallback, oSettings) { 
+            oSettings.jqXHR = BUNDLE.ajax({
+              'dataType': 'json',
+              'type': 'post',
+              'url': sSource,
+              'data': aoData,
+              'success': fnCallback
+            });
+        },
         'fnRowCallback': function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
             table.rowCallback(table, nRow, aData, iDisplayIndex, iDisplayIndexFull);
         },
         'fnInitComplete': function(oSettings, json) {
             table.completeCallback(table, oSettings, json);
-            // Show elements
-            jQuery('#submissionsTable').fadeIn();
-            jQuery(table.container).show();
+            $(loader).hide();
+            $('#submissionsTable').fadeIn();
+            $(table.container).show();
         }
     });
-}
-
-/**
- * Default row callback, which will add csrv as a data attribute to each row
- */
-function defaultRowCallback(table, nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-    jQuery(nRow).data('csrv', aData[6]);
-}
-
-/**
- * Default complete callback, which will bind a jquery live on click event.
- * It uses the data attribute csrv as part of the url param in the link
- */
-function defaultCompleteCallback(table, oSettings, json) {
-    // Remove all delegated click handlers from all rows
-    jQuery('#testDataTable tbody').off('click', 'tr');
-    // Click Event
-    jQuery('#testDataTable tbody').on('click', 'tr', function() {
-        window.open('/kinetic/DisplayPage?csrv=' + jQuery(this).data('csrv'));
-    });
-}
-
-/**
- * Custom complete callback, which will bind a jquery live on click event.
- * It uses the data attribute csrv as part of the url param in the link
- */
-function requestsOpenClosedCompleteCallback(table, oSettings, json) {
-    // Remove all delegated click handlers from all rows
-    jQuery('#tableContainerRequestsOpen tbody').off('click', 'tr');
-    // Click Event
-    jQuery('#tableContainerRequestsOpen tbody').on('click', 'tr', function() {
-        window.open(BUNDLE.config['submissionDetailsUrl']+'&submissionId=' + jQuery(this).data('csrv'));
-    });
-
-    updateTables();
-    $(window).on('resize', updateTables);
-    $(loader).hide();
 }

@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/submissionsMobile.css" type="text/css" />
         <!-- Page Javascript -->
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/ArsTable.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/ArsUrl.js"></script>
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/responsiveTables.js"></script>
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/submissionsMobile.js"></script>
         <!--[if lt IE 9]>
@@ -34,18 +34,8 @@
                         Loading Results
                     </div>
                     <%-- SUBMISSIONS VIEW --%>
-                    <div id="submissionsTable" class="">
-                        <div>
-                             <table class="tableContainer responsive hidden" id="tableContainerRequestsOpen">
-                                <thead>
-                                    <tr>
-                                        <th>Request ID</th>
-                                        <th>Service Item</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+                    <div id="submissionsTable" class="hidden">
+                        <table class="tableContainer responsive hidden" id="tableContainerRequestsOpen"></table>
                     </div>
                 </section>
             </div>
