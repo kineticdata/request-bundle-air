@@ -4,14 +4,14 @@
 
 /* Catalog Package Navigation */
 .menuContainer ul li a { color: inherit; border-bottom: 1px solid rgba(0,0,0,.1); }
-.menuContainer ul li a:hover,
-.menuContainer a.backMenu:hover  { background-color: #DDD; }
+.menuContainer ul li a:active,
+.menuContainer a.backMenu:active  { background-color: #DDD; }
 .menuContainer a.backMenu { color: white; background-color: #090; }
-.menuContainer a.backMenu:hover { color: #333; background-color: #090; }
-.menuContainer ul li a:hover,
-.menuContainer ul li a.arrow:hover { color: #111; background-color: rgba(0,153,0,0.1); }
+.menuContainer a.backMenu:active { color: #333; background-color: #090; }
+.menuContainer ul li a:active,
+.menuContainer ul li a.arrow:active { color: #111; background-color: rgba(0,153,0,0.1); }
 .menuContainer .templateButton { color: #666; background-color: #d3d3d3; }
-.menuContainer .templateButton:hover { color: #fff; background-color: #069; }
+.menuContainer .templateButton:active { color: #fff; background-color: #069; }
 
 /* Catalog Package Search */
 .search-header h1 span.sep { color: #bbb; }
@@ -28,6 +28,8 @@ form#loginForm fieldset input[type="submit"] { color: #fff; background: #999; }
 form#loginForm fieldset input[type="submit"]:hover,
 form#loginForm fieldset input[type="submit"]:focus { background: #777; }
 form#loginForm fieldset input[type="submit"]:active { background: #666; }
+
+:active
 
 /* END COLOR CONFIGURATION */
 /* --------------------------------------------------
