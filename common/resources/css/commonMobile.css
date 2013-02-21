@@ -22,6 +22,13 @@
 .search-results p { color: #999; }
 .highlighted { background: yellow; color: #000; }
 
+/* Base Package Login */
+form#loginForm fieldset input { background: #f5f5f5; }
+form#loginForm fieldset input[type="submit"] { color: #fff; background: #999; }
+form#loginForm fieldset input[type="submit"]:hover,
+form#loginForm fieldset input[type="submit"]:focus { background: #777; }
+form#loginForm fieldset input[type="submit"]:active { background: #666; }
+
 /* END COLOR CONFIGURATION */
 /* --------------------------------------------------
  Table of Contents
