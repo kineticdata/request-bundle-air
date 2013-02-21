@@ -291,6 +291,11 @@ text-align: left;
 color: white;
 background-color: #191919;
 }
+.dropdown-menu li form label input {
+float: none;
+margin: 0;
+width: auto;
+}
 .dropdown-menu .divider {
 height: 1px;
 margin: 5px 0;
