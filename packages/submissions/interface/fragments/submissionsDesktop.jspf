@@ -11,7 +11,7 @@
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/submissionsDesktop.css" type="text/css" />
         <!-- Page Javascript -->
-        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/arsTable.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/ArsTable.js"></script>
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/submissionsDesktop.js"></script>
     </head>
     <body>
