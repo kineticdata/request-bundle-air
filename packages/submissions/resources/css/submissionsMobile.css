@@ -7,12 +7,12 @@ table td, table th {
     white-space: nowrap; 
     overflow: hidden;
 }
-.ui-widget-header { border: none; }
 #main { padding: 0; }
 #tableContainerRequestsOpen_first,
 #tableContainerRequestsOpen_last,
 #tableContainerRequestsOpen_paginate span { display: none; }
 .ui-buttonset .ui-button { margin-left: 0; margin-right: 0.9em; padding: 5px; }
+.ui-widget-header { border-radius: 0; border: none; }
 .dropdown form  { margin-bottom: 0; }
 .scrollable { 
     overflow: scroll; 
@@ -20,3 +20,4 @@ table td, table th {
     position: relative; 
     border-right: none;
 }
+
