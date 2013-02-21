@@ -6,7 +6,7 @@
 .menuContainer ul li a { color: inherit; border-bottom: 1px solid rgba(0,0,0,.1); }
 .menuContainer ul li a:hover,
 .menuContainer a.backMenu:hover  { background-color: #DDD; }
-.menuContainer a.backMenu { color: #111; background-color: #090; }
+.menuContainer a.backMenu { color: white; background-color: #090; }
 .menuContainer a.backMenu:hover { color: #333; background-color: #090; }
 .menuContainer ul li a:hover,
 .menuContainer ul li a.arrow:hover { color: #111; background-color: rgba(0,153,0,0.1); }
