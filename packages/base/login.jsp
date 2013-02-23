@@ -27,7 +27,7 @@
     }
 %>
 <% if(isMobile) { %>
-    <%@include file="interface/fragments/loginMobile.jspf"%>
+    <%@include file="interface/loginMobile.jsp"%>
 <% } else { %>
-    <%@include file="interface/fragments/loginDesktop.jspf"%>
+    <%@include file="interface/loginDesktop.jsp"%>
 <% }%>

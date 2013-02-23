@@ -20,7 +20,7 @@
     }
 %>
 <% if(isMobile) { %>
-    <%@include file="interface/fragments/displayMobile.jspf"%>
+    <%@include file="interface/displayMobile.jsp"%>
 <% } else { %>
-    <%@include file="interface/fragments/displayDesktop.jspf"%>
+    <%@include file="interface/displayDesktop.jsp"%>
 <% }%>

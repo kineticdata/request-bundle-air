@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <title><%= customerRequest.getTemplateName()%></title>
         <%-- Include the application head content. --%>
-        <%@include file="../../../../core/interface/fragments/applicationHeadContent.jspf" %>
+        <%@include file="../../../core/interface/fragments/applicationHeadContent.jspf" %>
 
         <%-- Include the bundle common content. --%>
-        <%@include file="../../../../common/interface/fragments/headContent.jspf"%>
+        <%@include file="../../../common/interface/fragments/headContent.jspf"%>
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/login.css" type="text/css" />
         <!-- Page Javascript -->       
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/login.js"></script>
     </head>
     <body>
-        <%@include file="../../../../common/interface/fragments/contentHeader.jspf"%>       
+        <%@include file="../../../common/interface/fragments/contentHeader.jspf"%>       
         <div class="container">
             <div id="loginHeader" class="header">
                 Catalog Login
@@ -62,6 +62,6 @@
             </div>
             <div class="clearfix"></div>
         </div>
-        <%@include file="../../../../common/interface/fragments/contentFooter.jspf"%>
+        <%@include file="../../../common/interface/fragments/contentFooter.jspf"%>
     </body>
 </html>

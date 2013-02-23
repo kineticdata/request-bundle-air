@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <title><%= customerRequest.getTemplateName()%></title>
         <%-- Include the application head content. --%>
-        <%@include file="../../../../core/interface/fragments/applicationHeadContent.jspf" %>
+        <%@include file="../../../core/interface/fragments/applicationHeadContent.jspf" %>
         
         <%-- Include the bundle common content. --%>
-        <%@include file="../../../../common/interface/fragments/headContentMobile.jspf"%>
+        <%@include file="../../../common/interface/fragments/headContentMobile.jspf"%>
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/login.css" type="text/css" />
         <!-- Page Stylesheets -->
@@ -110,6 +110,6 @@
             </div>
             <div class="clearfix"></div>
         </div>
-        <%@include file="../../../../common/interface/fragments/contentFooterMobile.jspf"%>
+        <%@include file="../../../common/interface/fragments/contentFooterMobile.jspf"%>
     </body>
 </html>

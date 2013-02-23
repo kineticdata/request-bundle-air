@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <head>
+  <head>
+    <meta charset="utf-8">
         <title>
             <%= customerRequest.getTemplateName()%>
         </title>
+
         <%-- Include the application head content. --%>
-        <%@include file="../../../../core/interface/fragments/applicationHeadContent.jspf" %>
-        <%@include file="../../../../core/interface/fragments/reviewHeadContent.jspf"%>
+        <%@include file="../../../core/interface/fragments/applicationHeadContent.jspf" %>
+        <%@include file="../../../core/interface/fragments/reviewHeadContent.jspf"%>
 
         <%-- Include the bundle common content. --%>
-        <%@include file="../../../../common/interface/fragments/headContent.jspf"%>
+        <%@include file="../../../common/interface/fragments/headContent.jspf"%>
 
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/display.css" type="text/css" />
@@ -18,15 +20,11 @@
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/display.js"></script>
 
         <%-- Include the form head content, including attached css/javascript files and custom header content --%>
-        <%@include file="../../../../core/interface/fragments/formHeadContent.jspf"%>
+        <%@include file="../../../core/interface/fragments/formHeadContent.jspf"%>
     </head>
-    <body class="loadAllPages_<%=customerSurveyReview.getLoadAllPages()%> review">
+    <body class="loadAllPages_<%=customerSurveyReview.getLoadAllPages()%> reviewFrame">
         <div class="container">
-            <div id="contentBody">
-                <div id="reviewBorder">
-                    <%@include file="../../../../core/interface/fragments/reviewBodyContent.jspf"%>
-                </div>
-            </div>
+            <%@include file="../../../core/interface/fragments/reviewBodyContent.jspf"%>
         </div>
     </body>
 </html>

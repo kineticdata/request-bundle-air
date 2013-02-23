@@ -5,11 +5,11 @@
             <%= customerRequest.getTemplateName()%>
         </title>
         <%-- Include the application head content. --%>
-        <%@include file="../../../../core/interface/fragments/applicationHeadContent.jspf" %>
-        <%@include file="../../../../core/interface/fragments/reviewHeadContent.jspf"%>
+        <%@include file="../../../core/interface/fragments/applicationHeadContent.jspf" %>
+        <%@include file="../../../core/interface/fragments/reviewHeadContent.jspf"%>
 
         <%-- Include the bundle common content. --%>
-        <%@include file="../../../../common/interface/fragments/headContentMobile.jspf"%>
+        <%@include file="../../../common/interface/fragments/headContentMobile.jspf"%>
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/display.css" type="text/css" />
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/review.css" type="text/css" />
@@ -17,9 +17,9 @@
     </head>
     <body class="loadAllPages_<%=customerSurveyReview.getLoadAllPages()%> review">
         <div class="container">
-            <%@include file="../../../../common/interface/fragments/contentHeaderMobile.jspf"%>
-            <%@include file="../../../../core/interface/fragments/reviewBodyContent.jspf"%>
+            <%@include file="../../../common/interface/fragments/contentHeaderMobile.jspf"%>
+            <%@include file="../../../core/interface/fragments/reviewBodyContent.jspf"%>
         </div>
-        <%@include file="../../../../common/interface/fragments/contentFooterMobile.jspf"%>  
+        <%@include file="../../../common/interface/fragments/contentFooterMobile.jspf"%>  
     </body>
 </html>

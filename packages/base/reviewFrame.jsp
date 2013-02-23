@@ -23,7 +23,7 @@
     }
 %>
 <% if(isMobile) { %>
-    <%@include file="interface/fragments/reviewFrameMobile.jspf"%>
+    <%@include file="interface/reviewFrameMobile.jsp"%>
 <% } else { %>
-    <%@include file="interface/fragments/reviewFrameDesktop.jspf"%>
+    <%@include file="interface/reviewFrameDesktop.jsp"%>
 <% }%>
