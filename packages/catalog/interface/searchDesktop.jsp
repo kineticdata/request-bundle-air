@@ -6,13 +6,13 @@
             <%= bundle.getProperty("companyName") + " Search" %>
         </title>
         <%-- Include the common content. --%>
-        <%@include file="../../../../common/interface/fragments/headContent.jspf"%>
+        <%@include file="../../../common/interface/fragments/headContent.jspf"%>
 
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/searchDesktop.css" type="text/css" />
     </head>
     <body>
-        <%@include file="../../../../common/interface/fragments/contentHeader.jspf"%>
+        <%@include file="../../../common/interface/fragments/contentHeader.jspf"%>
         <div class="container clearfix">
             <%-- BREADCRUMBS VIEW --%>
             <ul id="catalogBreadCrumbs">
@@ -75,8 +75,8 @@
                     </ul>
                 <% }%>
             </div>
-            <%@include file="../../../../common/interface/fragments/sidebarDesktop.jspf"%>
+            <%@include file="../../../common/interface/fragments/sidebarDesktop.jspf"%>
         </div>
-        <%@include file="../../../../common/interface/fragments/contentFooter.jspf"%>
+        <%@include file="../../../common/interface/fragments/contentFooter.jspf"%>
     </body>
 </html>

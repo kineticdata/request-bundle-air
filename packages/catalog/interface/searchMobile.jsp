@@ -6,13 +6,13 @@
             <%= bundle.getProperty("companyName") + " Search" %>
         </title>
         <%-- Include the common content. --%>
-        <%@include file="../../../../common/interface/fragments/headContentMobile.jspf"%>
+        <%@include file="../../../common/interface/fragments/headContentMobile.jspf"%>
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/searchMobile.css" type="text/css" />
     </head>
     <body>
         <div class="container">
-            <%@include file="../../../../common/interface/fragments/contentHeaderMobile.jspf"%>
+            <%@include file="../../../common/interface/fragments/contentHeaderMobile.jspf"%>
             <div class="wrapper clearfix">
                 <!-- Breadcrumbs Begins -->
                 <nav class="breadcrumb">
@@ -57,6 +57,6 @@
                 </section>
             </div>
         </div>
-        <%@include file="../../../../common/interface/fragments/contentFooterMobile.jspf"%>
+        <%@include file="../../../common/interface/fragments/contentFooterMobile.jspf"%>
     </body>
 </html>

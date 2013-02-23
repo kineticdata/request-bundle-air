@@ -32,7 +32,7 @@
     }
 %>
 <% if(isMobile) { %>
-    <%@include file="interface/fragments/catalogMobile.jspf"%>
+    <%@include file="interface/catalogMobile.jsp"%>
 <% } else { %>
-    <%@include file="interface/fragments/catalogDesktop.jspf"%>
+    <%@include file="interface/catalogDesktop.jsp"%>
 <% }%>

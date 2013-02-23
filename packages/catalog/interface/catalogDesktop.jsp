@@ -6,7 +6,7 @@
             <%= bundle.getProperty("companyName") + " " + bundle.getProperty("catalogName")%>
         </title>
         <%-- Include the common content. --%>
-        <%@include file="../../../../common/interface/fragments/headContent.jspf"%>
+        <%@include file="../../../common/interface/fragments/headContent.jspf"%>
 
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/catalogDesktop.css" type="text/css" />
@@ -14,7 +14,7 @@
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/catalogDesktop.js"></script>
     </head>
     <body>
-        <%@include file="../../../../common/interface/fragments/contentHeader.jspf"%>
+        <%@include file="../../../common/interface/fragments/contentHeader.jspf"%>
         <div class="container containerBorderBottom">
             <%-- BREADCRUMBS VIEW --%>
             <ul id="catalogBreadCrumbs">
@@ -44,7 +44,7 @@
                 <div id="preview">
                 </div>
                 <div id="portalRequestContent" class="hidden">
-                    <%@include file="../../../../core/interface/fragments/displayBodyContent.jspf"%>
+                    <%@include file="../../../core/interface/fragments/displayBodyContent.jspf"%>
                 </div>
                 <div id="previewLoader" class="hidden">
                     <img alt="Please Wait." src="<%=bundle.bundlePath()%>common/resources/images/spinner.gif" />
@@ -52,9 +52,9 @@
                     Loading Description
                 </div>
             </div>
-            <%@include file="../../../../common/interface/fragments/sidebarDesktop.jspf"%>
+            <%@include file="../../../common/interface/fragments/sidebarDesktop.jspf"%>
         </div>
-        <%@include file="../../../../common/interface/fragments/contentFooter.jspf"%>
+        <%@include file="../../../common/interface/fragments/contentFooter.jspf"%>
         <%-- ROOT CATEGORIES DATA --%>
         <ul id="rootCategories" class="hidden">
             <% for (Category category : catalog.getRootCategories(context)) { %>

@@ -72,7 +72,7 @@
     }
 %>
 <% if(isMobile) { %>
-    <%@include file="interface/fragments/searchMobile.jspf"%>
+    <%@include file="interface/searchMobile.jsp"%>
 <% } else { %>
-    <%@include file="interface/fragments/searchDesktop.jspf"%>
+    <%@include file="interface/searchDesktop.jsp"%>
 <% }%>
