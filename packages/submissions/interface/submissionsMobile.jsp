@@ -12,7 +12,6 @@
         <!-- Page Javascript -->
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/jquery.dataTables.js"></script>
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/ArsUrl.js"></script>
-        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/responsiveTables.js"></script>
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/submissionsMobile.js"></script>
     </head>
     <body>
