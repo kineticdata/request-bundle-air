@@ -29,7 +29,7 @@
     }
 %>
 <% if(isMobile) { %>
-    <%@include file="interface/fragments/submissionsMobile.jspf"%>
+    <%@include file="interface/submissionsMobile.jsp"%>
 <% } else { %>
-    <%@include file="interface/fragments/submissionsDesktop.jspf"%>
+    <%@include file="interface/submissionsDesktop.jsp"%>
 <% }%>

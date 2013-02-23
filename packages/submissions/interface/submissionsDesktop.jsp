@@ -6,16 +6,16 @@
             <%= bundle.getProperty("companyName")%>&nbsp;My Requests
         </title>
         <%-- Include the common content. --%>
-        <%@include file="../../../../common/interface/fragments/headContent.jspf"%>
+        <%@include file="../../../common/interface/fragments/headContent.jspf"%>
 
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/submissionsDesktop.css" type="text/css" />
         <!-- Page Javascript -->
-        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/ArsTable.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/arsTable.js"></script>
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/submissionsDesktop.js"></script>
     </head>
     <body>
-        <%@include file="../../../../common/interface/fragments/contentHeader.jspf"%>
+        <%@include file="../../../common/interface/fragments/contentHeader.jspf"%>
         <div class="container containerBorderBottom">
             <%-- BREADCRUMBS VIEW --%>
             <ul id="catalogBreadCrumbs">
@@ -36,15 +36,15 @@
             </div>
             <%-- SUBMISSIONS VIEW --%>
             <div id="submissionsTable" class="hidden">
-                <%@include file="tableControls.jspf"%>
+                <%@include file="fragments/tableControls.jspf"%>
                 <div class="tableContainer hidden" id="tableContainerRequestsOpen"></div>
                 <div class="tableContainer hidden" id="tableContainerRequestsClosed"></div>
                 <div class="tableContainer hidden" id="tableContainerRequestsParked"></div>
                 <div class="tableContainer hidden" id="tableContainerApprovalsPending"></div>
                 <div class="tableContainer hidden" id="tableContainerApprovalsCompleted"></div>
             </div>
-            <%@include file="../../../../common/interface/fragments/sidebarDesktop.jspf"%>
+            <%@include file="../../../common/interface/fragments/sidebarDesktop.jspf"%>
         </div>
-        <%@include file="../../../../common/interface/fragments/contentFooter.jspf"%>
+        <%@include file="../../../common/interface/fragments/contentFooter.jspf"%>
     </body>
 </html>
