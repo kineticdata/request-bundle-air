@@ -7,6 +7,7 @@
         public static final String FIELD_DESCRIPTION = "700001010";
         public static final String FIELD_ID = "179";
         public static final String FIELD_NAME = "700001000";
+        public static final String FIELD_STATUS = "7";
         public static final String FIELD_DISPLAY_NAME = "700002298";
         public static final String[] FIELD_IDS = new String[]{
             FIELD_ID, FIELD_DESCRIPTION, FIELD_NAME, FIELD_ANONYMOUS_URL,
@@ -34,7 +35,8 @@
         public static Template[] findByCatalogName(HelperContext context, String catalogName) {
             Template[] results = new Template[0];
 
-            String qualification = "'"+FIELD_CATALOG+"' = \""+catalogName+"\"";
+            String qualification = "'"+FIELD_CATALOG+"' = \""+catalogName+"\" AND "+
+                "'"+FIELD_STATUS+"' != \"Delete\"";
 
             SimpleEntry[] entries = ArsBase.find(context, FORM_NAME, qualification, FIELD_IDS);
             if (entries != null && entries.length > 0) {
