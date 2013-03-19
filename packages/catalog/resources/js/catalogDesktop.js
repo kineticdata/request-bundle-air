@@ -85,7 +85,7 @@ $(document).ready(function() {
                BUNDLE.ajax({
                    cache: false,
                    type: "GET",
-                   url: "/kinetic/DisplayPage?srv=" + descriptionId + "&tzOffset=" + escape((new Date()).getTimezoneOffset()),
+                   url: BUNDLE.applicationPath + "DisplayPage?srv=" + encodeURIComponent(descriptionId),
                    beforeSend: function(jqXHR, settings) {
                        $("#previewLoader").show();
                    },
