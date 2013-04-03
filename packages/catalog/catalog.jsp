@@ -16,6 +16,9 @@
     Map<String, String> templateDescriptions = DescriptionHelper.getTemplateDescriptionMap(context, catalog);
     Map<String, String> categoryDescriptions = DescriptionHelper.getCategoryDescriptionMap(context, catalog);
 
+    // Get ul li tree node
+    StringBuffer htmlTree = RecursiveNavigation.getHtmlTree(context, catalog, categoryDescriptions, templateDescriptions);
+
     // Mobile Check
     Boolean isMobile = false;
     if(request.getParameter("mobile") != null) {

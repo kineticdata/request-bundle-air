@@ -1,0 +1,63 @@
+<%!
+    public static class RecursiveNavigation {
+
+        /**
+         * @param HelperContent object
+         * @param Catalog object
+         * @return StringBuffer object with ul li tree
+         */
+        public static StringBuffer getHtmlTree(HelperContext context, Catalog catalog, Map<String, String> categoryDescriptions, Map<String, String> templateDescriptions) {
+            StringBuffer htmlTree = new StringBuffer();
+            // Initialize the queue of items
+            LinkedList<Object> queue = new LinkedList();
+
+            boolean rootCatgories = true;
+             
+            // Add each of the root categories to the queue
+            for (Category category : catalog.getRootCategories(context)) {
+                queue.add(category);
+            }
+            // While the queue has items
+            while(!queue.isEmpty()) {
+                // Remove the item at the head of the list
+                Object item = queue.remove();
+             
+                // If the item is a template
+                if (item instanceof Template) {
+                    // Cast it to the proper object type
+                    Template template = (Template)item;
+                    // Write the template item
+                    htmlTree.append("<li class=\"template\" data-id="+template.getId()+" data-name=\""+template.getName()+"\" data-description-id=\""+templateDescriptions.get(template.getId())+"\">");
+                    htmlTree.append("<div class=\"name\">"+template.getName()+"</div>");
+                    htmlTree.append("<div class=\"description\">"+template.getDescription()+"</div>");
+                    htmlTree.append("</li>");
+                }
+                // If the item is a ServiceList
+                else if (item instanceof Category) {
+                    // Cast it to the proper object type
+                    Category category = (Category)item;
+                    // Write the opening of the category
+                    htmlTree.append("<ul class=\"category\" data-id="+category.getId()+" data-name=\""+category.getName()+"\" data-description-id=\""+categoryDescriptions.get(category.getId())+"\">");
+                    htmlTree.append("<li class=\"category-details\">");
+                    htmlTree.append("<div class=\"name\">"+category.getName()+"</div>");
+                    htmlTree.append("<div class=\"description\">"+category.getDescription()+"</div>");
+                    // Add null to the beginning of the queue as a placeholder for when the 
+                    // category is done
+                    queue.add(0, null);
+                    // Add all of the child templates to the beginning of the queue for processing
+                    queue.addAll(0, Arrays.asList(category.getTemplates()));
+                    // Add all of the child categories to the beginning of the queue for processing
+                    queue.addAll(0, Arrays.asList(category.getSubcategories()));
+                }
+                // If the item is a Category, indicating we are done processing the category and all of
+                // the decendent subcategories/templates
+                else {
+                    // Write the closing of the category
+                    htmlTree.append("</ul>");
+                    htmlTree.append("</li>");
+                }
+            }
+            return htmlTree;
+        }
+    }
+%>

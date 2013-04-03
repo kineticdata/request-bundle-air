@@ -32,15 +32,9 @@
             <div id="searchResults" class="hidden">
             </div>
             <div id="catalogContainer">
-                <div id="nestedNav" class="borderRight">
-                    <%-- TEMPLATES VIEW --%>
-                    <ul id="templatesNav" class="unstyled">
-                    </ul>
-                    <div id="navDivider" class="borderTop hidden"></div>
-                    <%-- CATAGORIES VIEW --%>
-                    <ul id="categoriesNav" class="unstyled">
-                    </ul>
-                </div>
+                <nav id="nestedNav" class="borderRight">
+                    <%= htmlTree%>
+                </nav>
                 <div id="preview">
                 </div>
                 <div id="portalRequestContent" class="hidden">
