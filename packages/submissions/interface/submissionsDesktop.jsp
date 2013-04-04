@@ -35,7 +35,7 @@
                 Loading Results
             </div>
             <%-- SUBMISSIONS VIEW --%>
-            <div id="submissionsTable" class="hidden">
+            <div id="submissionsTable" class="hidden borderRight">
                 <%@include file="fragments/tableControls.jspf"%>
                 <div class="tableContainer hidden" id="tableContainerRequestsOpen"></div>
                 <div class="tableContainer hidden" id="tableContainerRequestsClosed"></div>
