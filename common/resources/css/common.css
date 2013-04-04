@@ -263,15 +263,7 @@ ul.unstyled {
  * Disabled
  */
 .templateButton[disabled] {
-    color: #000000;
-    cursor: not-allowed;
-    background-color: #e6e6e6;
-    background-image: none;
-    opacity: 0.65;
-    filter: alpha(opacity=65);
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+    cursor: progress;
 }
 
 /**
