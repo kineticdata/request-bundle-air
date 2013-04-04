@@ -1,12 +1,14 @@
 $(document).ready(function() {
     // Page load events
-    $('#preview').html($('#portalRequestContent').html());
+    $('#preview').hide();
+    $('#portalRequestContent').show();
     $('ul#categoriesNav').html($('#rootCategories').html());
     
     /* This jQuery unobtrusive on click event displays the menus */
     $('ul#categoriesNav').on('click', '.category', function() {
         // Clear previews
-        $('#preview').empty();
+        $('#preview').empty().show();
+        $('#portalRequestContent').hide();
         // Get current clicked category id and name
         var categoryId =  $(this).data('id');
         var categoryName =  $(this).data('name');
@@ -43,7 +45,7 @@ $(document).ready(function() {
     /* This jQuery unobtrusive on click event manages the view for bread crumbs, categories and templates. */
     $('ul#catalogBreadCrumbs').on('click', 'li.breadCrumb', function() {
         // Clear previous previews
-        $('#preview').empty();
+        $('#preview').empty().show();
         // Get current clicked bread crumb category id
         var categoryId =  $(this).data('id');
         // Check if root bread crumb is selected
@@ -51,7 +53,8 @@ $(document).ready(function() {
             // Remove arrow for currently selected
             $(this).find('.breadCrumbArrow').remove();
             var rootCategories = $('#rootCategories').html();
-            $('#preview').html($('#portalRequestContent').html());
+            $('#preview').hide();
+            $('#portalRequestContent').show();
             $('ul#categoriesNav').html(rootCategories);
             $('ul#templatesNav').empty();           
             $(this).nextAll().remove();

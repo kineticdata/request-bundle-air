@@ -13,7 +13,7 @@
 /**
  * Preview of templates
  */
-#preview, #previewLoader {
+#preview, #previewLoader, #portalRequestContent {
    width: 520px;
    margin: 10px 0px 0px 10px;
    float: left;
