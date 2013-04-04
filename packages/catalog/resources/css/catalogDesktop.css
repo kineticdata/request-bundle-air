@@ -4,8 +4,9 @@
  * Catalog Container
  */
 #catalogContainer {
-    width: 800px;
+    width: 794px;
     margin-left: 0;
+    margin-right: 5px;
     float: left;
     min-height: 1px;
 }

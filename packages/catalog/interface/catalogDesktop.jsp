@@ -31,7 +31,7 @@
             <%-- SEARCH RESULTS VIEW --%>
             <div id="searchResults" class="hidden">
             </div>
-            <div id="catalogContainer">
+            <div id="catalogContainer" class="borderRight">
                 <div id="nestedNav" class="borderRight">
                     <%-- TEMPLATES VIEW --%>
                     <ul id="templatesNav" class="unstyled">
