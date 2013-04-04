@@ -24,7 +24,7 @@ ul#catalogBreadCrumbs li.breadCrumb, ul#catalogBreadCrumbs li.breadCrumbArrow { 
 /* Catalog Navigation */
 #categoriesNav .navigation,
 #templatesNav .navigation {
-    color: #000000;
+    color: #666666;
     background-color: #FFFFFF;
 }
 

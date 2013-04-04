@@ -38,6 +38,7 @@ ul#categoriesNav li.category .name {
     padding: 5px 0 5px 15px; 
     font-weight: bold;
     width: auto;
+    font-size: 14px;
 }
 
 ul#categoriesNav li.category .name:hover {
@@ -61,6 +62,7 @@ ul#templatesNav {
 ul#templatesNav li.template .name {
     padding: 5px 0 5px 10px;
     width: auto;
+    font-size: 14px;
 }
 ul#templatesNav li.template .name:hover {
     cursor: pointer;
