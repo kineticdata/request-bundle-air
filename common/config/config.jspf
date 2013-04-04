@@ -5,7 +5,7 @@
 --%>
 <%
     bundle.setProperty("companyName", "ACME2");
-    bundle.setProperty("catalogName", "Air");
+    bundle.setProperty("catalogName", "ACME2");
 
     bundle.setProperty("catalogUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_Catalog");
     bundle.setProperty("loginUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_Login");
