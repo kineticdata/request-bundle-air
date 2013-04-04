@@ -23,7 +23,7 @@ $(document).ready(function() {
         // Find category's templates and get the html
         var currentTemplates = $('#'+categoryId).find('.templates').html();
          // Display the category's templates into div
-        $('ul#templatesNav').html(currentTemplates);
+        $('ul#templatesNav').html(currentTemplates).show();
         // Add arrow to the last bread crumbs child before we append new category bread crumb
         $('ul#catalogBreadCrumbs').append('<li class="breadCrumbArrow">></li>'); 
         // Create new bread crumb with the category's details
@@ -56,7 +56,7 @@ $(document).ready(function() {
             $('#preview').hide();
             $('#portalRequestContent').show();
             $('ul#categoriesNav').html(rootCategories);
-            $('ul#templatesNav').empty();           
+            $('ul#templatesNav').empty().hide();          
             $(this).nextAll().remove();
             // Set divider
             setNavDivider();
