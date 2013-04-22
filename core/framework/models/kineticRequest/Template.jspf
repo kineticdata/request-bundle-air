@@ -71,9 +71,11 @@
         public void addCategory(Category category) {
             categories.add(category);
         }
+
         public Category[] getCategories() {
             return categories.toArray(new Category[categories.size()]);
         }
+
         public boolean hasCategories() {
             return categories.size() > 0;
         }
@@ -98,12 +100,15 @@
             }
             templateAttributeList.add(templateAttribute);
         }
+
         public Map<String,List<TemplateAttribute>> getTemplateAttributesMap() {
             return templateAttributesMap;
         }
+
         public String[] getTemplateAttributeNames() {
             return templateAttributesMap.keySet().toArray(new String[templateAttributesMap.size()]);
         }
+
         public String[] getTemplateAttributeValues(String attributeName) {
             String[] results = new String[0];
             List<TemplateAttribute> attributes = templateAttributesMap.get(attributeName);
@@ -114,6 +119,42 @@
                 }
             }
             return results;
+        }
+
+        public String getTemplateAttributeValue(String attributeName) {
+            String result = null;
+            String[] attributeValues = getTemplateAttributeValues(attributeName);
+            if(attributeValues.length > 1) {
+                throw new RuntimeException("Multiple results matched the attribute "+attributeName+" in template: "+getName());
+            }
+            else if (attributeValues.length == 1) {
+                result = attributeValues[0];
+            }
+            return result;
+        }
+
+        public boolean hasTemplateAttributeValue(String attributeName, String attributeValue) {
+            String[] attributeValues = getTemplateAttributeValues(attributeName);
+            if(attributeValues != null && attributeValues.length > 0) {
+                for (String attributeValueEntry : attributeValues){
+                    if (attributeValueEntry.equals(attributeValue)) { 
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public boolean hasTemplateAttribute(String attributeName) {
+            String[] attributeNames = getTemplateAttributeNames();
+            if(attributeNames != null && attributeNames.length > 0) {
+                for (String attributeNameEntry : attributeNames){
+                    if (attributeNameEntry.equals(attributeName)) { 
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         public String getAnonymousUrl() {
