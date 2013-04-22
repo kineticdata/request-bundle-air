@@ -10,7 +10,7 @@
         public static final String FIELD_SUBMITTER = "2";
         public static final String FIELD_TEMPLATE_ID = "700000800";
         public static final String FIELD_TEMPLATE_NAME = "700001000";
-	public static final String FIELD_REQUEST_CLOSED_DATE = "700088489";
+        public static final String FIELD_REQUEST_CLOSED_DATE = "700088489";
         public static final String FIELD_LOOKUP_ID = "700002450";
         public static final String FIELD_ORIGINATING_ID = "600000310";
 
@@ -90,6 +90,42 @@
 
             return results;
         }
+
+        public static Submission[] findRecentApprovalsByCatalogName(HelperContext context, String catalogName, Integer number) {
+            return findRecentByCatalogNameAndSubmitType(context, catalogName, "Approval", number);
+        } 
+
+        public static Submission[] findRecentRequestsByCatalogName(HelperContext context, String catalogName, Integer number) {
+            return findRecentByCatalogNameAndSubmitType(context, catalogName, null, number);
+        }
+
+        public static Submission[] findRecentWorkOrdersByCatalogName(HelperContext context, String catalogName, Integer number) {
+            return findRecentByCatalogNameAndSubmitType(context, catalogName, "WorkOrder", number);
+        }
+
+        public static Submission[] findRecentByCatalogNameAndSubmitType(HelperContext context, String catalogName, String submitType, Integer number) {
+            Submission[] results = new Submission[0];
+            String qualification = null;
+            if (submitType != null) {
+                qualification = "'"+FIELD_CATALOG_NAME+"' = \""+catalogName+"\" AND "+
+                                "'"+FIELD_SUBMITTER+"' = \""+context.getUserName()+"\" AND "+
+                                "'"+FIELD_SUBMIT_TYPE+"' = \""+submitType+"\"";
+            } else {
+                qualification = "'"+FIELD_CATALOG_NAME+"' = \""+catalogName+"\" AND "+
+                                "'"+FIELD_SUBMITTER+"' = \""+context.getUserName()+"\" AND "+
+                                "'"+FIELD_SUBMIT_TYPE+"' = $NULL$";
+            }
+
+            SimpleEntry[] entries = ArsBase.find(context, FORM_NAME, qualification, FIELD_IDS, number);
+            if (entries != null && entries.length > 0) {
+                results = new Submission[entries.length];
+                for(int i=0;i<results.length;i++) {
+                    results[i] = new Submission(entries[i]);
+                }
+            }
+
+            return results;
+        }
         
         public Submission[] getChildren(HelperContext context) {
             String qualification = "'"+FIELD_LOOKUP_ID+"' = \""+getId()+"\" AND '"+FIELD_ID+"' != '"+FIELD_LOOKUP_ID+"'";
@@ -143,7 +179,7 @@
         public String getTemplateName() {return entry.getEntryFieldValue(FIELD_TEMPLATE_NAME);}
         public String getStatus() {return entry.getEntryFieldValue(FIELD_STATUS);}
         public String getRequestStatus() {return entry.getEntryFieldValue(FIELD_REQUEST_STATUS);}
-		public String getRequestClosedDate() {return entry.getEntryFieldValue(FIELD_REQUEST_CLOSED_DATE);}
+        public String getRequestClosedDate() {return entry.getEntryFieldValue(FIELD_REQUEST_CLOSED_DATE);}
         public String getValiationStatus() {return entry.getEntryFieldValue(FIELD_VALIDATION_STATUS);}
     }
 %>
