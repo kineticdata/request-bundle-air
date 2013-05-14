@@ -11,6 +11,10 @@
     min-height: 1px;
 }
 
+div.imageElementLayer {
+    overflow: hidden;
+}
+
 /**
  * Preview of templates
  */
