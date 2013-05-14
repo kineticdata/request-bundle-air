@@ -182,7 +182,7 @@ function intializeDataTable(tableParams, groupName, arsUrl) {
         'fnServerData': function (sSource, aoData, fnCallback, oSettings) { 
             oSettings.jqXHR = BUNDLE.ajax({
               'dataType': 'json',
-              'type': 'post',
+              'type': 'get',
               'url': sSource,
               'data': aoData,
               'success': fnCallback
