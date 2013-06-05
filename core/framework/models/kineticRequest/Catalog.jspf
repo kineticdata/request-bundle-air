@@ -82,9 +82,11 @@
             Category[] categories = this.getAllCategories(context);
             Template[] templates = this.getTemplates(context);
             
+            // Only return new or active. Categorization must be 1:1 with templates
+            // getTemplates returns only new or active templates
             String categorizationQualification =
                 "'"+CATEGORIZATION_FIELD_CATALOG_ID+"' = \""+this.getName()+"\" AND "+
-                "'"+CATEGORIZATION_FIELD_STATUS+"' != \"Delete\"";
+                "('"+CATEGORIZATION_FIELD_STATUS+"' = \"Active\" OR '"+CATEGORIZATION_FIELD_STATUS+"' = \"New\")";
 
             SimpleEntry[] categorizations = ArsBase.find(context,
                 CATEGORIZATION_FORM_NAME,

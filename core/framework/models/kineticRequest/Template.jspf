@@ -34,9 +34,9 @@
 
         public static Template[] findByCatalogName(HelperContext context, String catalogName) {
             Template[] results = new Template[0];
-
+            // Only return new or active templates
             String qualification = "'"+FIELD_CATALOG+"' = \""+catalogName+"\" AND "+
-                "'"+FIELD_STATUS+"' != \"Delete\"";
+                "('"+FIELD_STATUS+"' = \"New\" OR '"+FIELD_STATUS+"' = \"Active\")";
 
             SimpleEntry[] entries = ArsBase.find(context, FORM_NAME, qualification, FIELD_IDS);
             if (entries != null && entries.length > 0) {
@@ -71,7 +71,7 @@
         public void addCategory(Category category) {
             categories.add(category);
         }
-
+        
         public Category[] getCategories() {
             return categories.toArray(new Category[categories.size()]);
         }
