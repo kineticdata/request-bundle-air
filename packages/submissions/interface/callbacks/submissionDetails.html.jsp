@@ -17,7 +17,7 @@
 <div class="submissionDetails" title="Submission Details">
     <div class="header">
         <div class="requestId">
-            <a href="/kinetic/ReviewRequest?csrv=<%=submission.getId()%>&reviewPage=<%= bundle.getProperty("reviewJsp")%>">
+            <a href="/kinetic/ReviewRequest?csrv=<%=submission.getId()%>&reviewPage=<%= bundle.getProperty("reviewJsp")%>&excludeByName=Review%20Page">
                 <%= submission.getRequestId()%>
             </a>
         </div>
