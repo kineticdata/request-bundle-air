@@ -76,7 +76,7 @@ $(document).ready(function() {
      */
     function requestsParkedCellCallback(table, element, rowData, rowIndex, cellData, cellIndex) {
         if (cellIndex == table.getIndex('Request Id')) {
-            var anchor = '<a href="/kinetic/DisplayPage?csrv=' + rowData[table.getIndex('Instance Id')] + '&return=yes">' + cellData + '</a>';
+            var anchor = '<a href="' + BUNDLE.applicationPath + 'DisplayPage?csrv=' + rowData[table.getIndex('Instance Id')] + '&return=yes">' + cellData + '</a>';
             $(element).html(anchor);
         }
     }
@@ -87,7 +87,7 @@ $(document).ready(function() {
      */
     function approvalsPendingCellCallback(table, element, rowData, rowIndex, cellData, cellIndex) {
         if (cellIndex == table.getIndex('Request Id')) {
-            var anchor = '<a href="/kinetic/DisplayPage?csrv=' + rowData[table.getIndex('Instance Id')] + '">' + cellData + '</a>';
+            var anchor = '<a href="' + BUNDLE.applicationPath + 'DisplayPage?csrv=' + rowData[table.getIndex('Instance Id')] + '">' + cellData + '</a>';
             $(element).html(anchor);
         }
     }

@@ -80,7 +80,7 @@ function defaultCompleteCallback(table, oSettings, json) {
     $('#testDataTable tbody').off('click', 'tr');
     // Click Event
     $('#testDataTable tbody').on('click', 'tr', function() {
-        window.open('/kinetic/DisplayPage?csrv=' + $(this).data('csrv'));
+        window.open(BUNDLE.applicationPath + 'DisplayPage?csrv=' + $(this).data('csrv'));
     });
 }
 
