@@ -26,7 +26,7 @@
                         <li class="nav box">
                     <% }%>
                         <a data-group-name="<%=groupName%>" href="<%= bundle.getProperty("submissionsUrl")%>&status=<%=groupName%>">
-                            <%=count%> <%=groupName%>
+                            <%=count%>&nbsp;<%=groupName%>
                         </a>
                     </li>
                 <% }%>

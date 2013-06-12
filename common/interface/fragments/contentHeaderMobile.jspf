@@ -75,7 +75,7 @@
                 <%-- If there are more than 0 records matching, display a link to the table. --%>
                     <% if (Integer.valueOf(bundle.getProperty(groupName+" Count")) > 0 && groupName.equals("Requests Open")) { %>
                         <a class="requests" href="<%= bundle.getProperty("submissionsUrl")%>&status=<%=groupName%>">
-                            <%= Integer.valueOf(bundle.getProperty(groupName+" Count"))%> <%=groupName%>
+                            <%= Integer.valueOf(bundle.getProperty(groupName+" Count"))%>&nbsp;<%=groupName%>
                         </a>
                     <% }%>
                 <% }%>
