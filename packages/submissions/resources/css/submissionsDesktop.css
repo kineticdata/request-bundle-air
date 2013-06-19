@@ -42,12 +42,19 @@ table.kd-table tbody td {
     padding: 3px;
 }
 
-div.tableContainer table.kd-table tr {
+div.tableContainer table.kd-table tr.kd-row,
+div.tableContainer table.kd-table tr.kd-headerrow  {
     cursor: pointer;
 }
 
-div#tableContainerApprovalsCompleted table.kd-table tr {
+div#tableContainerApprovalsCompleted table.kd-table tr.kd-row {
     cursor: auto;
+}
+
+table.kd-table tr.kd-highlight td.kd-cell-sorting-descending,
+table.kd-table tr.kd-highlight td.kd-cell-sorting-ascending,
+table.kd-table tr.kd-highlight {
+    background: #99CC99; color: #000000;
 }
 
 table.kd-table .kd-header-sorting-descending {
