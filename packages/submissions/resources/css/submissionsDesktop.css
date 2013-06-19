@@ -42,8 +42,12 @@ table.kd-table tbody td {
     padding: 3px;
 }
 
-table.kd-table th {
+div.tableContainer table.kd-table tr {
     cursor: pointer;
+}
+
+div#tableContainerApprovalsCompleted table.kd-table tr {
+    cursor: auto;
 }
 
 table.kd-table .kd-header-sorting-descending {

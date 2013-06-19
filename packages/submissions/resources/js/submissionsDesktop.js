@@ -20,8 +20,6 @@ $(document).ready(function() {
             'Submitted'    : '700001285',
             'Service Item' : '700001000',
             'Status'       : '700002400'
-            //'First Name'   : '300299800',
-            //'Last Name'    : '700001806'
         },
         hiddenFields: {
             'Instance Id' : '179'
@@ -51,13 +49,87 @@ $(document).ready(function() {
                 }
             });
         },
-        tableCompleteCallback: function(table, element) {
-            // Remove all delegated click handlers from all rows
-            $(table.container).off('click', 'tr.kd-row');
-            $(table.container).on('click', 'tr.kd-row', function() {
-                window.open($(this).data('csrv'));
-            }); 
-        }
+        tableCompleteCallback: function(table, element) {}
+    }
+
+    /* Table Options for Parked Requests */
+    var tableOptionsParked = {
+        form: "KS_SRV_CustomerSurvey_base",
+        fields: {
+            'Request Id'   : '1',
+            'Modified'    : '6',
+            'Service Item' : '700001000',
+            'Status'       : '700002400'
+        },
+        hiddenFields: {
+            'Instance Id' : '179'
+        },
+        sortField: "Request Id",
+        sortOrder: "descending",
+        pageSize: 15,
+        pageNumber: 1,
+        // This callback function simply refreshes the table controls by calling
+        // the refreshTableControls function defined below.
+        tableCallback: function(table, element) {
+            refreshTableControls();
+            $(loader).hide();
+            $('#submissionsTable').show();
+            
+        },
+        // This callback function binds a click event to each of the header
+        // cells that when clicked it either sorts the table by that field or
+        // toggles the sort order depending on if it was already sorting by that
+        // field.
+        headerCallback: function(table, element, label) {
+            $(element).click(function() {
+                if ( label != table.sortField ) {
+                    table.sortBy(label);
+                } else {
+                    table.toggleSort();
+                }
+            });
+        },
+        tableCompleteCallback: function(table, element) {}
+    }
+
+    /* Table Options for Pending Requests */
+    var tableOptionsPending = {
+        form: "KS_SRV_CustomerSurvey_base",
+        fields: {
+            'Request Id'   : '1',
+            'Sent'    : '700001282',
+            'Service Item' : '700001000',
+            'Status'       : '700002400'
+        },
+        hiddenFields: {
+            'Instance Id' : '179'
+        },
+        sortField: "Request Id",
+        sortOrder: "descending",
+        pageSize: 15,
+        pageNumber: 1,
+        // This callback function simply refreshes the table controls by calling
+        // the refreshTableControls function defined below.
+        tableCallback: function(table, element) {
+            refreshTableControls();
+            $(loader).hide();
+            $('#submissionsTable').show();
+            
+        },
+        // This callback function binds a click event to each of the header
+        // cells that when clicked it either sorts the table by that field or
+        // toggles the sort order depending on if it was already sorting by that
+        // field.
+        headerCallback: function(table, element, label) {
+            $(element).click(function() {
+                if ( label != table.sortField ) {
+                    table.sortBy(label);
+                } else {
+                    table.toggleSort();
+                }
+            });
+        },
+        tableCompleteCallback: function(table, element) {}
     }
 
     /*
@@ -65,31 +137,50 @@ $(document).ready(function() {
      * If the cell is displaying a request id instead of the normal text we will
      * create a link for submission details.
      */
-    function requestsOpenClosedCellCallback(table, rowElement, rowData, rowIndex) {
+    function requestsOpenClosedRowCallback(table, rowElement, rowData, rowIndex) {
         var url = BUNDLE.config['submissionDetailsUrl']+'&submissionId=' + rowData[table.getIndex('Instance Id')];
         $(rowElement).data('csrv', url);
+        // Remove all delegated click handlers from all rows
+        $(table.container).off('click', 'tr.kd-row');
+        $(table.container).on('click', 'tr.kd-row', function() {
+            window.open($(this).data('csrv'));
+        });
     }
     
     /*
      * Define the cell callback for the parked requests table.  This function
      * inserts a link that takes the user to the parked request.
      */
-    function requestsParkedCellCallback(table, element, rowData, rowIndex, cellData, cellIndex) {
-        if (cellIndex == table.getIndex('Request Id')) {
-            var anchor = '<a href="' + BUNDLE.applicationPath + 'DisplayPage?csrv=' + rowData[table.getIndex('Instance Id')] + '&return=yes">' + cellData + '</a>';
-            $(element).html(anchor);
-        }
+    function requestsParkedRowCallback(table, rowElement, rowData, rowIndex) {
+        var url = BUNDLE.applicationPath + 'DisplayPage?csrv=' + rowData[table.getIndex('Instance Id')] + '&return=yes';
+        $(rowElement).data('csrv', url);
+        // Remove all delegated click handlers from all rows
+        $(table.container).off('click', 'tr.kd-row');
+        $(table.container).on('click', 'tr.kd-row', function() {
+            window.open($(this).data('csrv'));
+        });
     }
     
     /*
      * Define the cell callback for the pending approvals table.  This function
      * inserts a link that takes the user to the approval.
      */
-    function approvalsPendingCellCallback(table, element, rowData, rowIndex, cellData, cellIndex) {
-        if (cellIndex == table.getIndex('Request Id')) {
-            var anchor = '<a href="' + BUNDLE.applicationPath + 'DisplayPage?csrv=' + rowData[table.getIndex('Instance Id')] + '">' + cellData + '</a>';
-            $(element).html(anchor);
-        }
+    function approvalsPendingRowCallback(table, rowElement, rowData, rowIndex) {
+        var url = BUNDLE.applicationPath + 'DisplayPage?csrv=' + rowData[table.getIndex('Instance Id')];
+        $(rowElement).data('csrv', url);
+        // Remove all delegated click handlers from all rows
+        $(table.container).off('click', 'tr.kd-row');
+        $(table.container).on('click', 'tr.kd-row', function() {
+            window.open($(this).data('csrv'));
+        });
+    }
+
+    /*
+     * Define the cell callback for the completed approvals table.
+     */
+    function approvalsCompletedRowCallback(table, rowElement, rowData, rowIndex) {
+        // Remove all delegated click handlers from all rows
+        $(table.container).off('click', 'tr.kd-row');
     }
     
     /*
@@ -100,31 +191,32 @@ $(document).ready(function() {
         "Requests Open": new Table($.extend(tableOptions, {
             container: '#tableContainerRequestsOpen',
             qualification: 'Requests Open',
-            rowCallback: requestsOpenClosedCellCallback,
+            rowCallback: requestsOpenClosedRowCallback,
             initialize: false
         })),
         "Requests Closed": new Table($.extend(tableOptions, {
             container: '#tableContainerRequestsClosed',
             qualification: 'Requests Closed',
-            cellCallback: requestsOpenClosedCellCallback,
+            rowCallback: requestsOpenClosedRowCallback,
             initialize: false
         })),
-        "Requests Parked": new Table($.extend(tableOptions, {
+        "Requests Parked": new Table($.extend(tableOptionsParked, {
             container: '#tableContainerRequestsParked',
             qualification: 'Requests Parked',
-            cellCallback: requestsParkedCellCallback,
+            rowCallback: requestsParkedRowCallback,
             initialize: false
         })),
-        "Approvals Pending": new Table($.extend(tableOptions, {
+        "Approvals Pending": new Table($.extend(tableOptionsPending, {
             container: '#tableContainerApprovalsPending',
             qualification: 'Approvals Pending',
-            cellCallback: approvalsPendingCellCallback,
+            rowCallback: approvalsPendingRowCallback,
             initialize: false
         })),
         "Approvals Completed": new Table($.extend(tableOptions, {
             container: '#tableContainerApprovalsCompleted',
             qualification: 'Approvals Completed',
-            initialize: false
+            initialize: false,
+            rowCallback: approvalsCompletedRowCallback
         }))
     }
    
