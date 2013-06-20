@@ -4,6 +4,11 @@ $(document).ready(function() {
     });
 });
 
+// This jQuery method can be used to check the existance of dom elements
+jQuery.fn.exists = function() {
+    return this.length > 0;
+} 
+
 // This will load a little faster if we keep it out of document ready
 if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('Android') != -1) {
     addEventListener("load", function() {
