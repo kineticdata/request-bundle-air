@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/jquery.qtip.css" type="text/css" />
         <!-- Page Javascript -->
          <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/jquery.qtip.min.js"></script>
-        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/submissionDetails.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/submissionDetailsMobile.js"></script>
     </head>
     
     <body>
@@ -39,9 +39,9 @@
                 <div class="timeline">
                     <ul class="events">
                         <%-- REQUEST START VIEW --%>
-                        <li style="width: 99.5%; left: 0.2%;">
+                        <li style="width: 99.5%; left: 0.2%; padding: 0 0 3px 0;">
                             <div class="requestId">
-                                <a title="Review Submission" class="read" href="/kinetic/ReviewRequest?csrv=<%=submission.getId()%>&reviewPage=<%= bundle.getProperty("reviewJsp")%>&excludeByName=Review%20Page">
+                                <a style="position: relative; right: 0; border-radius: 11px 11px 0 0;" title="Review Submission" class="read" href="/kinetic/ReviewRequest?csrv=<%=submission.getId()%>&reviewPage=<%= bundle.getProperty("reviewJsp")%>&excludeByName=Review%20Page">
                                     Kinetic Request - <%= submission.getRequestId()%>
                                 </a>
                             </div>
@@ -64,7 +64,7 @@
                         <%-- TASKS VIEW --%>
                         <% for (String treeName : submission.getTaskTreeExecutions(context).keySet()) {%>
                             <% for (Task task : submission.getTaskTreeExecutions(context).get(treeName)) {%>
-                            <li class="task" style="width: 15%; left: 0.2%;" data-created="<%= DateHelper.formatDate(task.getCreateDate(), request.getLocale())%>"
+                            <li class="task" style="width: 30%; left: 0.2%;" data-created="<%= DateHelper.formatDate(task.getCreateDate(), request.getLocale())%>"
                             <% if (task.getStatus().equals("Closed")) {%>
                                 data-closed="<%= DateHelper.formatDate(task.getModifiedDate(), request.getLocale())%>"
                             <% } else {%>
