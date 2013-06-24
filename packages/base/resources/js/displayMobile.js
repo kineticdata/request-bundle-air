@@ -18,7 +18,7 @@ KD.utils.ClientManager.alertPanel = function (options) {
         };
     }
     if($('div.warningContainer').exists()) {
-            $('div.warningTitle').replaceWith(options.body);
+        $('div.warningContainer').html(options.body);
     } else {
         $('div.templateButtonLayer').before('<div class="warningContainer">' + options.body + '</div>');
     }
