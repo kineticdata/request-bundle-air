@@ -9,18 +9,26 @@ $(document).ready(function() {
         var taskLength = Math.ceil((taskClosed.getTime() - taskCreated.getTime()));
         var percent = taskLength / submissionLength;
         // Format the percent
-        var wholeNumber = percent * 100;
+        var wholeNumberWidth = percent * 100;
         // Check if the percent is under 15 and do not use
-        if(wholeNumber >= 15) {
-            $(this).css({'width': wholeNumber+'%'})
+        if(wholeNumberWidth >= 15) {
+            $(this).css({'width': wholeNumberWidth+'%'})
+        } else {
+            wholeNumberWidth = 15;
         }
         
         // Now adjust left positioning
         var totalTimeBeforeTaskStart = taskCreated - submissionCreated;
         var percent = totalTimeBeforeTaskStart / submissionLength;
         // Format the percent
-        var wholeNumber = percent * 100;
-        $(this).css({'left': wholeNumber+'%'});
+        var wholeNumberLeft = percent * 100;
+        // Determine if width is less than left position and subtract width from left otherwise make left 0
+        if(wholeNumberWidth < wholeNumberLeft) {
+            var left = wholeNumberLeft - wholeNumberWidth;
+        } else {
+            var left = 0;
+        }
+        $(this).css({'left': left+'%'});
     });
 
     initializeTip('.task', '.details');
