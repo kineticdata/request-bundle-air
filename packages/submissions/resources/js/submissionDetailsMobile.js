@@ -35,9 +35,9 @@ $(document).ready(function() {
         $(this).css({'left': left+'%'});
 
         // Determine tool tip position based on width and left positioning
-        if(wholeNumberLeft > 75 && wholeNumberWidth < 25) {
+        if(wholeNumberLeft > 60 && wholeNumberWidth < 40) {
             var my = 'right bottom';
-        } else if(wholeNumberLeft < 25 && wholeNumberWidth < 25) {
+        } else if(wholeNumberLeft < 40 && wholeNumberWidth < 40) {
             var my = 'left bottom';
         } else {
             var my = 'bottom center';
