@@ -33,28 +33,36 @@ $(document).ready(function() {
             var left = 0;
         }
         $(this).css({'left': left+'%'});
+
+        // Determine tool tip position based on width and left positioning
+        if(wholeNumberLeft > 75 && wholeNumberWidth < 25) {
+            var my = 'right bottom';
+        } else if(wholeNumberLeft < 25 && wholeNumberWidth < 25) {
+            var my = 'left bottom';
+        } else {
+            var my = 'bottom center';
+        }
+        initializeTip(this, $(this).find('.details'), my);
     });
 
-    initializeTip('.task', '.details');
+    
 });
 
 /**
  * @param selector string
  * @param attr string 
  */
-function initializeTip(selector, childSelector) {
-    $(selector).each(function() {
-        $(this).qtip({
-            content: $(this).children(childSelector),
-            style: {
-                corner: 'bottom left',
-                classes: 'ui-tooltip-tipsy ui-tooltip-shadow'
-            },
-            position: {
-                my: 'bottom left',
-                at: 'top middle'
-            }
-        });
+function initializeTip(selector, childSelector, my) {
+    $(selector).qtip({
+        content: $(childSelector).children(),
+        style: {
+            corner: 'bottom left',
+            classes: 'ui-tooltip-tipsy ui-tooltip-shadow'
+        },
+        position: {
+            my: my,
+            at: 'top middle'
+        }
     });
 }
 
