@@ -8,6 +8,10 @@ $(document).ready(function() {
         var taskClosed = new Date($(this).data('closed'));
         var taskLength = Math.ceil((taskClosed.getTime() - taskCreated.getTime()));
         var percent = taskLength / submissionLength;
+        // Check if percent is greater than 1 for tasks that might be completed after the request is closed and default the percent to 1
+        if (percent > 1) {
+            var percent = 1;
+        }
         // Format the percent
         var wholeNumberWidth = percent * 100;
         // Check if the percent is under 15 and do not use
