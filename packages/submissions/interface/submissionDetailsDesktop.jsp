@@ -111,7 +111,8 @@
                             <div class="details">
                                 <div id="submissionCloseDate" class="detail" data-closed="<%= DateHelper.formatDate(submission.getRequestClosedDate(), request.getLocale())%>">
                                     &nbsp;(<%= DateHelper.formatDate(submission.getCreateDate(), request.getLocale())%> - <%= DateHelper.formatDate(submission.getRequestClosedDate(), request.getLocale())%>)
-                                </div> Total business days
+                                </div>
+                                Elapsed Days<span id="elapsed-days"></span>
                             </div>
                         <%} else {%>
                              Request Open
@@ -119,7 +120,7 @@
                                  <div id="submissionCloseDate" class="detail" data-closed="<%= DateHelper.getCurrentDateTime(request.getLocale())%>">
                                      &nbsp;(<%= DateHelper.formatDate(submission.getCreateDate(), request.getLocale())%> - <%= DateHelper.getCurrentDateTime(request.getLocale())%>)
                                  </div> 
-                                 Elapsed Total Days and Elapsed Business Days
+                                Elapsed Days&nbsp;<span id="elapsed-days"></span>
                             </div>
                         <% }%>
                         </li>

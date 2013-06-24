@@ -44,8 +44,9 @@ $(document).ready(function() {
         }
         initializeTip(this, $(this).find('.details'), my);
     });
-
-    
+    // Elapsed Days
+    var elapsedDays = Math.floor(submissionLength / 86400000);
+    $('span#elapsed-days').text(elapsedDays);
 });
 
 /**
