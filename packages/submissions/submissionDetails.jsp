@@ -59,7 +59,7 @@
                                         Notes: <%= submission.getNotes()%>
                                         <%}%>
                                     </div>
-                                    <div id="submissionStartDate" class="detail" data-created="<%= submission.getCreateDate()%>">
+                                    <div id="submissionStartDate" class="detail" data-created="<%= DateHelper.formatDate(submission.getCreateDate(), request.getLocale())%>">
                                         <%= DateHelper.formatDate(submission.getCreateDate(), request.getLocale())%>
                                     </div>
                                 </div>
