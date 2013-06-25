@@ -8,24 +8,21 @@
     width: auto;
 }
 
-.requestId a.read {
+div.requestId a.read {
     background-color: #99CC99;
     border: 1px solid #99CC99;
-    border-radius: 12px 12px 12px 12px;
     color: #FFFFFF;
     display: block;
     font-size: 12px;
     font-weight: bold;
     padding: 2px 12px;
     text-decoration: none;
-    position: absolute;
-    right: 10px;
+    border-radius: 11px 11px 0 0;
 }
 
-.requestId a.read:hover {
+div.requestId a.read:hover {
     background-color: #009900;
     border: 1px solid #009900;
-    border-radius: 12px 12px 12px 12px;
     color: #FFFFFF;
     display: block;
     font-size: 12px;
@@ -44,6 +41,15 @@ ul.events {
     padding: 0 0 20px 0;
 }
 
+ul.events li:first-child {
+    padding: 0 0 3px 0;
+    width: 100%;
+}
+
+ul.events li:last-child {
+    width: 100%;
+}
+
 ul.events li {
     -webkit-border-radius: 11px;
     -moz-border-radius: 11px;
@@ -57,6 +63,10 @@ ul.events li {
     padding: 3px 0;
     position: relative;
     text-align: center;
+}
+
+ul.events li div.template {
+    margin-top: 5px;
 }
 
 ul.events .detail {

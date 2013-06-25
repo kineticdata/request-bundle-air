@@ -39,9 +39,9 @@
                 <div class="timeline">
                     <ul class="events">
                         <%-- REQUEST START VIEW --%>
-                        <li style="width: 99.5%; left: 0.2%;">
+                        <li>
                             <div class="requestId">
-                                <a title="Review Submission" class="read" href="/kinetic/ReviewRequest?csrv=<%=submission.getId()%>&reviewPage=<%= bundle.getProperty("reviewJsp")%>&excludeByName=Review%20Page">
+                                <a title="Review Submission" class="read" href="<%= bundle.applicationPath()%>ReviewRequest?csrv=<%=submission.getId()%>&reviewPage=<%= bundle.getProperty("reviewJsp")%>&excludeByName=Review%20Page">
                                     Kinetic Request - <%= submission.getRequestId()%>
                                 </a>
                             </div>
@@ -60,11 +60,10 @@
                             </div>
                         </li>
 
-
                         <%-- TASKS VIEW --%>
                         <% for (String treeName : submission.getTaskTreeExecutions(context).keySet()) {%>
                             <% for (Task task : submission.getTaskTreeExecutions(context).get(treeName)) {%>
-                            <li class="task" style="width: 15%; left: 0.2%;" data-created="<%= DateHelper.formatDate(task.getCreateDate(), request.getLocale())%>"
+                            <li class="task" style="width: 15%;" data-created="<%= DateHelper.formatDate(task.getCreateDate(), request.getLocale())%>"
                             <% if (task.getStatus().equals("Closed")) {%>
                                 data-closed="<%= DateHelper.formatDate(task.getModifiedDate(), request.getLocale())%>"
                             <% } else {%>
@@ -105,7 +104,7 @@
                         <% }%>
                         
                         <%-- REQUEST COMPLETE/OPEN VIEW --%>
-                        <li class="status" style="width: 99.5%; left: 0;">
+                        <li>
                         <% if (submission.getRequestStatus().equals("Closed")) {%>
                             Request Closed
                             <div class="details">
@@ -124,8 +123,8 @@
                             </div>
                         <% }%>
                         </li>
-                    </ul> <!-- end .events -->
-                </div> <!-- end timeline -->
+                    </ul>
+                </div>
                 <div style="height: 1px;"></div>
             </div>
             <% }%>
