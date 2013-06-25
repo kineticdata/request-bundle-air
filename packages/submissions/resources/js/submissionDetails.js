@@ -26,11 +26,11 @@ $(document).ready(function() {
         var percent = totalTimeBeforeTaskStart / submissionLength;
         // Format the percent
         var wholeNumberLeft = percent * 100;
-        // Determine if width is less than left position and subtract width from left otherwise make left 0
-        if(wholeNumberWidth < wholeNumberLeft) {
+        // Determine if width plus left position is greater than 100 and subtract
+        if((Math.floor(wholeNumberWidth) + Math.floor(wholeNumberLeft)) > 100) {
             var left = wholeNumberLeft - wholeNumberWidth;
         } else {
-            var left = 0;
+            var left = wholeNumberLeft;
         }
         $(this).css({'left': left+'%'});
 
