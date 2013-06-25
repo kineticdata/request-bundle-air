@@ -12,26 +12,34 @@ $(document).ready(function() {
         if (percent > 1) {
             var percent = 1;
         }
-        // Format the percent
+        // Set the percent
         var wholeNumberWidth = percent * 100;
         // Check if the percent is under 15 and do not use
-        if(wholeNumberWidth >= 15) {
-            $(this).css({'width': wholeNumberWidth+'%'})
-        } else {
+        if(wholeNumberWidth <= 15) {
             wholeNumberWidth = 15;
         }
-        
-        // Now adjust left positioning
+
+        // Set left positioning
         var totalTimeBeforeTaskStart = taskCreated - submissionCreated;
         var percent = totalTimeBeforeTaskStart / submissionLength;
-        // Format the percent
         var wholeNumberLeft = percent * 100;
+
         // Determine if width plus left position is greater than 100 and subtract
         if((Math.floor(wholeNumberWidth) + Math.floor(wholeNumberLeft)) > 100) {
-            var left = wholeNumberLeft - wholeNumberWidth;
+            // Correct subtraction to avoid returning a negative value
+            if(wholeNumberWidth < wholeNumberLeft) {
+                var left = wholeNumberLeft - wholeNumberWidth;
+            } else {
+                var left = wholeNumberWidth - wholeNumberLeft;
+                // This corrects tasks completed after the submission is closed
+                var wholeNumberWidth = wholeNumberWidth - left;
+            }
         } else {
             var left = wholeNumberLeft;
         }
+
+        // Set the styles
+        $(this).css({'width': wholeNumberWidth+'%'});
         $(this).css({'left': left+'%'});
 
         // Determine tool tip position based on width and left positioning
