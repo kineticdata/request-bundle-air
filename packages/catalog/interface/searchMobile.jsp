@@ -42,7 +42,7 @@
                             <ol class="search-results">
                             <% for (int i = 0; i < matchingTemplates.length; i++) {%>
                                 <li>
-                                    <a href="DisplayPage?srv=<%= matchingTemplates[i].getId()%>">
+                                    <a href="<%= bundle.applicationPath()%>DisplayPage?srv=<%= matchingTemplates[i].getId()%>">
                                         <%= CatalogSearch.replaceAll(combinedPattern, matchingTemplates[i].getName())%>
                                     </a>
                                     <p class="description">
