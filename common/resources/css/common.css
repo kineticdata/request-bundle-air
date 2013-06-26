@@ -691,7 +691,7 @@ ul#catalogBreadCrumbs li.breadCrumb:hover {
 }
 
 #catalogSearchForm label  {
-    margin: 2px 0px 0px 10px;
+    margin: 3px 0 0 8px;
     position:absolute; 
     top:0; 
     left:0;
