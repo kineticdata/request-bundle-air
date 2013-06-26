@@ -21,7 +21,7 @@
         <%@include file="../../../core/interface/fragments/formHeadContent.jspf"%>
     </head>
     <body class="loadAllPages_<%=customerSurveyReview.getLoadAllPages()%> review">
-        <%@include file="fragments/contentHeaderDesktop.jspf"%>
+        <%@include file="fragments/contentHeaderReviewDesktop.jspf"%>
         <div class="container">
             <div id="contentBody">
                 <div id="reviewBorder">
