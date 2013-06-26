@@ -12,6 +12,7 @@
     bundle.setProperty("profileUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_UserProfile");
     bundle.setProperty("searchUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_Search");
     bundle.setProperty("submissionsUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_Submissions");
+    bundle.setProperty("submissionDetailsUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_SubmissionDetails");
 
     bundle.setProperty("searchNameParam", "ACME2_Search");
     bundle.setProperty("logoutUrl", "KSAuthenticationServlet?Logout=true");
