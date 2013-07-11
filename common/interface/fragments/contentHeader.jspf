@@ -15,18 +15,6 @@
                     <% } %>
                 </li>
             <% } %>
-            <li class="mobileChoice">
-                <% if(bundle.getProperty("reviewMode").equals("true")) {%>
-                <form method="post" action="<%= bundle.applicationPath()%>ReviewRequest?<%= request.getQueryString()%>">
-                <% } else {%>
-                <form method="post" action="<%= bundle.applicationPath()%>DisplayPage?<%= request.getQueryString()%>">
-                <% }%>
-                    <label>
-                        <input type="checkbox" name="mobile" value="true" />
-                        Mobile
-                    </label>
-                </form>
-            </li>
             <% if (context != null) {%>
                 <li class="logout">
                     <a href="<%= bundle.getProperty("logoutUrl")%>">logout</a>

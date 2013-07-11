@@ -14,18 +14,6 @@
                     <a href="<%=bundle.getProperty("catalogUrl")%>">Return to Catalog</a>
                 </li>
             <% } %>
-            <li class="mobileChoice">
-                 <% if(bundle.getProperty("reviewMode").equals("true")) {%>
-                <form method="post" action="<%= bundle.applicationPath()%>ReviewRequest?<%= request.getQueryString()%>">
-                <% } else {%>
-                <form method="post" action="<%= bundle.applicationPath()%>DisplayPage?<%= request.getQueryString()%>">
-                <% }%>
-                    <label>
-                        <input type="checkbox" name="mobile" value="true" />
-                        Mobile
-                    </label>
-                </form>
-            </li>
             <% if(customerRequest.getKsr() != null) {%>
                 <li class="ksrNumber">
                     <a href="<%= bundle.getProperty("submissionDetailsUrl")%>&submissionId=<%= csrv%>">

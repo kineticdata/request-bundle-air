@@ -55,19 +55,6 @@
                                     </a>
                                 </li>
                             <% } %>
-                            <li class="divider"></li>
-                            <li>
-                                <% if(bundle.getProperty("reviewMode").equals("true")) {%>
-                                <form method="post" action="<%= bundle.applicationPath()%>ReviewRequest?<%= request.getQueryString()%>">
-                                <% } else {%>
-                                <form method="post" action="<%= bundle.applicationPath()%>DisplayPage?<%= request.getQueryString()%>">
-                                <% }%>
-                                    <label>
-                                        <input type="checkbox" name="mobile" value="false" />
-                                        Desktop
-                                    </label>
-                                </form>
-                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -75,7 +62,7 @@
                 <%-- If there are more than 0 records matching, display a link to the table. --%>
                     <% if (Integer.valueOf(bundle.getProperty(groupName+" Count")) > 0 && groupName.equals("Requests Open")) { %>
                         <a class="requests" href="<%= bundle.getProperty("submissionsUrl")%>&status=<%=groupName%>">
-                            <%= Integer.valueOf(bundle.getProperty(groupName+" Count"))%>&nbsp;<%=groupName%>
+                            <%= Integer.valueOf(bundle.getProperty(groupName+" Count"))%> <%=groupName%>
                         </a>
                     <% }%>
                 <% }%>

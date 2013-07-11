@@ -4,17 +4,17 @@
     NOTE: This file is required.
 --%>
 <%
-    bundle.setProperty("companyName", "ACME2");
-    bundle.setProperty("catalogName", "ACME2");
+    bundle.setProperty("companyName", "AIR");
+    bundle.setProperty("catalogName", "AIR");
 
-    bundle.setProperty("catalogUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_Catalog");
-    bundle.setProperty("loginUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_Login");
-    bundle.setProperty("profileUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_UserProfile");
-    bundle.setProperty("searchUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_Search");
-    bundle.setProperty("submissionsUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_Submissions");
-    bundle.setProperty("submissionDetailsUrl", bundle.applicationPath() + "DisplayPage?name=ACME2_SubmissionDetails");
+    bundle.setProperty("catalogUrl", bundle.applicationPath() + "DisplayPage?name=AIR_Catalog");
+    bundle.setProperty("loginUrl", bundle.applicationPath() + "DisplayPage?name=AIR_Login");
+    bundle.setProperty("profileUrl", bundle.applicationPath() + "DisplayPage?name=AIR_UserProfile");
+    bundle.setProperty("searchUrl", bundle.applicationPath() + "DisplayPage?name=AIR_Search");
+    bundle.setProperty("submissionsUrl", bundle.applicationPath() + "DisplayPage?name=AIR_Submissions");
+    bundle.setProperty("submissionDetailsUrl", bundle.applicationPath() + "DisplayPage?name=AIR_SubmissionDetails");
 
-    bundle.setProperty("searchNameParam", "ACME2_Search");
+    bundle.setProperty("searchNameParam", "AIR_Search");
     bundle.setProperty("logoutUrl", "KSAuthenticationServlet?Logout=true");
 
     java.util.Map<String,String> submissionGroups = new java.util.LinkedHashMap();
