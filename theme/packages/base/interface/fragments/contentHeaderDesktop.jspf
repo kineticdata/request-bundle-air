@@ -1,0 +1,26 @@
+<header class="contentHeader">
+    <%-- THIS COMPENSATES FOR STICKY ELEMENTS USED IN CATALOG. --%>
+    <div class="graySpacer"></div>
+    <div class="container containerBorderTop">
+        <a href="<%= bundle.getProperty("catalogUrl")%>">
+            <img alt="<%= bundle.getProperty("companyName") %>" class="logoHeader" src="<%= bundle.bundlePath()%>common/resources/images/logo.png" />
+        </a>
+        <ul class="headerNav">
+            <% if (context != null) {%>
+                <li class="userInfo">
+                    <a href="<%=bundle.getProperty("catalogUrl")%>">Return to Catalog</a>
+                </li>
+            <% } %>
+            <% if(customerRequest.getKsr() != null) {%>
+                <li class="ksrNumber">
+                    <%= customerRequest.getKsr() %>
+                </li>
+            <% }%>
+            <% if (context != null) {%>
+                <li class="logout">
+                    <a href="<%= bundle.getProperty("logoutUrl")%>">logout</a>
+                </li>
+            <% } %>
+        </ul>
+    </div>
+</header>

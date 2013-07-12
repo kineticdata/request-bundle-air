@@ -1,0 +1,45 @@
+/* Search Results List
+----------------------*/
+.search-header{
+    border-bottom: 1px solid rgba(0,153,0,0.25);
+    margin-bottom: 20px;
+}
+
+.search-header h1 span.sep {
+    margin: 0 2px;
+    font-weight: normal;
+    text-shadow: none;
+}
+
+.search-header h1 em {
+    font-weight: normal;
+    font-style: normal;
+}
+
+.search-results li {
+    position: relative;
+    border-bottom: 1px solid #e8eae9;
+    float: none;
+    width: auto;
+    margin: 0 0 20px;
+    padding: 0;
+}
+
+.search-results li a {
+    display: block;
+    overflow: hidden;
+}
+
+.search-results li a span.search-img {
+    float: left;
+    display: block;
+    width: 60px;
+    height: 58px;
+    margin: 0 8px 0 0;
+    padding: 5px;
+}
+
+.search-results li a span.search-img img{
+    max-width: 60px;
+    max-height: 45px;
+}

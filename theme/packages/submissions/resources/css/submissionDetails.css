@@ -1,0 +1,99 @@
+.topNavContainer {
+    background-color: #009900;
+    color: #FFFFFF;
+    font-weight: bold;
+    height: 22px;
+    margin: 0 10px 0 10px;
+    padding: 2px 0 0 5px;
+    width: auto;
+}
+
+div.requestId a.read {
+    background-color: #99CC99;
+    border: 1px solid #99CC99;
+    color: #FFFFFF;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 12px;
+    text-decoration: none;
+    border-radius: 11px 11px 0 0;
+}
+
+div.requestId a.read:hover {
+    background-color: #009900;
+    border: 1px solid #009900;
+    color: #FFFFFF;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 12px;
+    text-decoration: none;
+}
+
+.timeline {
+    margin: 10px;
+}
+
+ul.events {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 0 20px 0;
+}
+
+ul.events li:first-child {
+    padding: 0 0 3px 0;
+    width: 100%;
+}
+
+ul.events li:last-child {
+    width: 100%;
+}
+
+ul.events li {
+    -webkit-border-radius: 11px;
+    -moz-border-radius: 11px;
+    border-radius: 11px;
+    background: #eee;
+    border: 1px solid #ddd;
+    color: #707070;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    padding: 3px 0;
+    position: relative;
+    text-align: center;
+}
+
+ul.events li div.template {
+    margin-top: 5px;
+}
+
+ul.events .detail {
+    color: #aaa;
+    font-weight: normal;
+    font-size: 10px;
+}
+
+ul.intervals {
+    list-style-type: none;
+    padding: 0;
+    display: block;
+}
+
+/* The width depends on the number of intervals. For example 100 / 7 = 14.29% -- then subtract a little bit for room for the borders */
+ul.intervals li {
+    background: #fff url(http://mattbango.com/images/1x1_eee.gif) repeat-x left 10%;
+    border-right: 1px solid #ccc;
+    color: #999;
+    float: left;
+    font-size: 12px;
+    margin: 0;
+    padding: 15px 0;
+    text-align: center;
+    width: 14.17%;
+}
+
+ul.intervals li.first {
+    border-left: 1px solid #ccc;
+}

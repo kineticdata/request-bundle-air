@@ -1,0 +1,66 @@
+/**
+ * Search
+ */
+#searchResults {
+    float: left;
+    width: 800px;
+    min-height: 1px;
+}
+
+#searchResults .message {
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    margin-top: 40px;
+}
+
+#searchResults .highlighted {
+    padding: 0px 0px 0px 0px;
+}
+
+#searchResults .templateName {
+    padding: 0px 0px 0px 5px;
+}
+
+#searchResults .templateName a {
+    font-weight: bold;
+}
+
+#searchResults ul.templates {
+    margin: 2px 0 0 0;
+    list-style: none;
+}
+
+#searchResults .templates .template {
+    margin: 10px 10px 10px 10px;
+    padding: 5px;
+}
+
+#searchResults .templates .template .attribute {
+    margin-bottom: 5px;
+    padding-top: 5px;
+}
+
+#searchResults .templates .template .attributeName {
+    width: 100px;
+    padding: 0px 5px
+}
+
+#searchResults .templates .template .attributeValues {   
+    padding: 0px 5px 0px 5px;
+}
+
+#searchResults .templates .template .attributeValues .attributeValue {
+    float: left;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+
+#searchResults .templates .template .templateDescription {
+    margin-bottom: 5px;
+    padding: 0px 5px 0px 5px;
+}
+
+#searchResults .templates .template .templateName {
+    margin-bottom: 5px;
+}

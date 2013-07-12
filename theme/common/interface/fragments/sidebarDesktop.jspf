@@ -1,0 +1,37 @@
+<%-- SIDEBAR VIEW --%>
+<div id="sideNav">
+    <form id="catalogSearchForm" class="borderLeft borderTop borderBottom gradient" method="get" action="<%= bundle.applicationPath()%>DisplayPage">
+        <input type="hidden" name="name" value="<%= bundle.getProperty("searchNameParam") %>" />
+        <p>
+           <label class="infield" for="searchInput">
+                Search Catalog
+            </label>
+           <input id="searchInput" class="input-large" type="text" name="q" value="" />
+           <input type="submit" id="searchButton" value="" />
+        </p>
+    </form>
+    <%-- SUBMISSION TABLE LINKS --%>
+    <% if (context != null) { %>
+        <%-- For each of the submission group queries specified in the
+             common config.jsp file. --%>
+        <ul id="submissionNavigation">
+            <% for (String groupName : submissionGroups.keySet()) { %>
+                <%-- Count the number of submissions that match the current query --%>
+                <% Integer count = ArsBase.count(context, "KS_SRV_CustomerSurvey_base", submissionGroups.get(groupName)); %>
+                <%-- If there are more than 0 records matching, display a link to the table. --%>
+                <% if (count > 0) { %>
+                    <% if(request.getParameter("status") != null && request.getParameter("status").equals(groupName)) {%>
+                        <li class="nav box boxActive">
+                    <% } else {%>
+                        <li class="nav box">
+                    <% }%>
+                        <a data-group-name="<%=groupName%>" href="<%= bundle.getProperty("submissionsUrl")%>&status=<%=groupName%>">
+                            <%=count%>&nbsp;<%=groupName%>
+                        </a>
+                    </li>
+                <% }%>
+            <% }%>
+        </ul>
+    <% }%>
+</div>
+<div class="clearfix"></div>
