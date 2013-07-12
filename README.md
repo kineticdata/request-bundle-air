@@ -7,7 +7,8 @@ This project represents an out of the box Bundle solution for Kinetic Request. I
 
 ### Bundle
 The "theme" directory should be placed into the "themes" directory of your kinetic installation and renamed to match your catalog name
-Parent path:
+
+Parent path:  
 .../apache-tomcat-X.X.XX-sr/webapps/kinetic/themes
 
 ### Catalog
@@ -25,12 +26,12 @@ java -jar kurl.jar -action=build_catalog -directory=path-to-kurl-catalog-directo
 ~~~~
 
 6. When the import is complete, verify that the catalog is visible in Remedy and all the service items are imported.
-	a.	Catalog Login
-	b.	Catalog Portal
-	c.	Profile
-	d.	Search
-	e.	Submission Details
-	f.	Submissions
+    * Catalog Login
+    * Catalog Portal
+    * Profile
+    * Search
+    * Submission Details
+    * Submissions
 
 7. In the bundle directory open the your-theme-name/common/config/config.jspf file. Update each line where the word “AIR” is with the name of your catalog then save the file.
 
