@@ -1,32 +1,38 @@
 # Request Bundle Air Documentation
 
 ## Overview
-This project represents an out of the box Bundle solution for Request. It currently contains three packages, base, catalog and submissions.  Each package contains mobile and desktop display pages and resource files.  A helper file has been implemented to facilitate the routing between the mobile and desktop views with the option for the client to choose which view they want presented in their web browser.  See common/framework/helpers for more information on the MobileDetectionHelper.
+This project represents an out of the box Bundle solution for Kinetic Request. It contains the Air Theme and a Kurl catalog. See the Readme in each directory for further installation instructions and details.
 
-## Theming and Branding Information
-The Common directory contains the html resources that represent the theming for this Bundle.  Inside common/resources/css you will find a commonDesktop.css and CommonMobile.css.  These style sheets contain a listing of classes used throughout the Bundle's packages.  In addition to this, the very top of these style sheets contain the classes that deal with the color configuration for the Bundle.  Keeping the color configuration for a Bundle inside the common directory allows for easy implementation of theming without editing the style sheets for each of the packages.
+## Installation / Quick Start
 
-## Packages Information
-
-### Base
-Contains the display pages that deal with the submittable Request service items. It contains the display and review pages.
+### Bundle
+The "theme" directory should be placed into the "themes" directory of your kinetic installation and renamed to match your catalog name
+Parent path:
+.../apache-tomcat-X.X.XX-sr/webapps/kinetic/themes
 
 ### Catalog
-Contains the display pages that deal specifically with navigating and searching the Request catalog for submittable Request service items.
+1. Unzip the catalog.zip file 
 
-### Submissions
-Contains the display page that deals specifically with viewing requests that are open, closed, pending (needing approvals), completed (approval completed) and parked (unfinished request items).  In addition to this, there is a diplay page for viewing the submission details (timeline).
+2. Open the config.rb file in a text editor
 
-## Implementing the Portal
+3. Edit the “CATALOG_NAME” variable with the name you want to call your catalog. Use underscores or dashes instead of spaces.
 
-### Configuration - The Bundle
-Every Bundle has a common configuration file.  This file is stored inside common/config/config.jspf.  In order to get the Bundle to communicate with Request, you must setup the configuration to point to the catalog you have created inside Request using the bundle.setProperty method.  An example of this is already provided at the top of the common/config/config.jspf file.
+4. Edit the “THEMES_BASE” with the path to the bundle directory
 
+5. Using Kurl (http://community.kineticdata.com/10_Kinetic_Request/KURL/02_Get_Started), use the following command to start your catalog import by replacing the text, "path-to-kurl-catalog-directory", with the path (from your kurl directory) to your unzipped kurl catalog files:
 ~~~~
-bundle.setProperty("catalogName", "Air");
+java -jar kurl.jar -action=build_catalog -directory=path-to-kurl-catalog-directory
 ~~~~
 
-### Portal Page Configuration - Request
-Each package contains the display pages, which handle the routing for the mobile and desktop views.  For example, the catalog package has a catalog.jsp and search.jsp display page.  In order to start using these packages and their portal pages with Request, you must create a service item with the type "Portal". This service item must point to the display page you want to serve up in your web browser. Using the advance tab, the "Display Page (JSP)" field is where you supply the file path of the display page you want to use.  For example, the file path would look like this: /themes/bundle-request-air/packages/catalog/catalog.jsp with "bundle-request-air" being the name of the Bundle.  You can rename "bundle-request-air" to whatever you want.
+6. When the import is complete, verify that the catalog is visible in Remedy and all the service items are imported.
+	a.	Catalog Login
+	b.	Catalog Portal
+	c.	Profile
+	d.	Search
+	e.	Submission Details
+	f.	Submissions
 
-If this service item is meant to be a submittable Request item, you will point the service item to the base package display page: /themes/bundle-request-air/packages/base/display.jsp.  It's recommended that this kind of service item should not be labeled with the type "portal" because it's not meant to be a portal.
+7. In the bundle directory open the your-theme-name/common/config/config.jspf file. Update each line where the word “AIR” is with the name of your catalog then save the file.
+
+8.	Verify configuration by opening the web site in a browser: http://your-web-server/kinetic/DisplayPage?name=your-catalog-name
+
