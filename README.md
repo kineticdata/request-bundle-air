@@ -35,5 +35,6 @@ java -jar kurl.jar -action=build_catalog -directory=path-to-kurl-catalog-directo
 
 7. In the bundle directory open the your-theme-name/common/config/config.jspf file. Update each line where the word “AIR” is with the name of your catalog then save the file.
 
-8.	Verify configuration by opening the web site in a browser: http://your-web-server/kinetic/DisplayPage?name=your-catalog-name
+8. Verify configuration by opening the web site in a browser:  
+http://your-web-server/kinetic/DisplayPage?name=your-catalog-name
 
