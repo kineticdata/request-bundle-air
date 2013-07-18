@@ -41,7 +41,7 @@
                         <%-- REQUEST START VIEW --%>
                         <li>
                             <div class="requestId">
-                                <a title="Review Submission" class="read" href="<%= bundle.applicationPath()%>ReviewRequest?csrv=<%=submission.getId()%>&reviewPage=<%= bundle.getProperty("reviewJsp")%>&excludeByName=Review%20Page">
+                                <a title="Review Submission" class="read" href="<%= bundle.applicationPath()%>ReviewRequest?csrv=<%=submission.getId()%>&excludeByName=Review%20Page">
                                     Kinetic Request - <%= submission.getRequestId()%>
                                 </a>
                             </div>
