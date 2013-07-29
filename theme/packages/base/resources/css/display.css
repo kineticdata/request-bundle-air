@@ -110,6 +110,7 @@ textarea {
 
 /* Form controls */
 input[type="checkbox"] { float: left; margin: 4px 5px 0px 0px; }
+input[type="radio"] { margin: 0 5px 0 10px; }
 
 /* Checkboxes */
 #pageQuestionsForm .answerCheckbox { display: block !important; }
