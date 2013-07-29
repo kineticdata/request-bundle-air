@@ -107,7 +107,9 @@
                                     </div>
                                     <div class="description hidden">
                                         <%= template.getDescription()%>
-                                        <a class="templateButton" href="<%= pathHelper.templateUrl(template.getId())%>">Request</a>
+                                        <div class="request">
+                                            <a class="templateButton" href="<%= pathHelper.templateUrl(template.getId())%>">Request</a>
+                                        </div>
                                     </div>
                                 </li>
                                 <% }%>

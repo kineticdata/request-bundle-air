@@ -25,6 +25,8 @@ div.imageElementLayer {
    min-height: 1px;
 }
 
+#preview div.request { margin: 10px 0 10px 0; }
+
 /**
  * Nested Categories Navigation
  */
