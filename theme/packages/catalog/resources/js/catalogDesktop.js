@@ -25,7 +25,7 @@ $(document).ready(function() {
          // Display the category's templates into div
         $('ul#templatesNav').html(currentTemplates).show();
         // Add arrow to the last bread crumbs child before we append new category bread crumb
-        $('ul#catalogBreadCrumbs').append('<li class="breadCrumbArrow">></li>'); 
+        $('ul#catalogBreadCrumbs').append('<li class="breadCrumbArrow">&gt;</li>'); 
         // Create new bread crumb with the category's details
         var breadCrumb = '<li class="breadCrumb" data-id="'+categoryId+'" data-name="'+categoryName+'">'+categoryName+'</li>';
         // Append new bread crumb to current list of bread crumbs

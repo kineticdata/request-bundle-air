@@ -61,7 +61,7 @@
                 <% if (category.hasTemplates()) { %>
                     <li class="category" data-id="<%= category.getId()%>" data-name="<%= category.getName()%>">
                         <div class="name navigation" data-description-id="<%= categoryDescriptions.get(category.getId()) %>">
-                            <span class="arrow">></span> <%= category.getName()%>
+                            <span class="arrow">&gt;</span> <%= category.getName()%>
                         </div>
                         <div class="description hidden">
                             <%= category.getDescription()%>
@@ -85,7 +85,7 @@
                             <% if (subcategory.hasTemplates()) { %>
                             <li class="category" data-id="<%= subcategory.getId()%>" data-name="<%= subcategory.getName()%>">
                                 <div class="name navigation" data-description-id="<%= categoryDescriptions.get(subcategory.getId()) %>">
-                                    <span class="arrow">></span> <%= subcategory.getName()%>
+                                    <span class="arrow">&gt;</span> <%= subcategory.getName()%>
                                 </div>
                                 <div class="description hidden">
                                     <%= subcategory.getDescription()%>
