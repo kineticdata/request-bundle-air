@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title><%= bundle.getProperty("companyName") + " " + bundle.getProperty("catalogName")%></title>
-
         <%-- Include the common content. --%>
         <%@include file="../../../common/interface/fragments/headContent.jspf"%>
+        
+        <title><%= bundle.getProperty("companyName") + " " + bundle.getProperty("catalogName")%></title>
 
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/submissionDetails.css" type="text/css" />

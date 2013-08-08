@@ -6,6 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 <%--
+    Specify the character encoding for the document
+--%>
+<meta charset="utf-8">
+
+<%--
     Set the "Favicon" for the site.  Most modern browswers will associate this
     image with any bookmarks to the site, display the icon in tabs that are
     rendering the site, and may also display it in the URL bar.

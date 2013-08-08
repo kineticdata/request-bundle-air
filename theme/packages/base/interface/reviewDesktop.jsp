@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <%-- Include the bundle common content. --%>
+        <%@include file="../../../common/interface/fragments/headContent.jspf"%>
+        
         <title>
             <%= customerRequest.getTemplateName()%>
         </title>
         <%-- Include the application head content. --%>
         <%@include file="../../../core/interface/fragments/applicationHeadContent.jspf" %>
         <%@include file="../../../core/interface/fragments/reviewHeadContent.jspf"%>
-
-        <%-- Include the bundle common content. --%>
-        <%@include file="../../../common/interface/fragments/headContent.jspf"%>
 
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/display.css" type="text/css" />

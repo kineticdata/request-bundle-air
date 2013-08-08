@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <%-- Include the common content. --%>
+        <%@include file="../../../common/interface/fragments/headContent.jspf"%>
+        
         <title>
             <%= bundle.getProperty("companyName") + " " + bundle.getProperty("catalogName")%>
         </title>
-        <%-- Include the common content. --%>
-        <%@include file="../../../common/interface/fragments/headContent.jspf"%>
+
 
         <!-- Page Stylesheets -->
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/catalogDesktop.css" type="text/css" />
