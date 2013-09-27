@@ -16,7 +16,15 @@
     rendering the site, and may also display it in the URL bar.
 --%>
 <link rel="shortcut icon" href="<%=bundle.bundlePath()%>common/resources/images/favicon.png" type="image/x-icon" />
-
+<%--
+    Add Apple App metadata and icons. This will allow iPad and iPhone users
+    to save the website as an apple app.
+--%>
+<link rel="apple-touch-icon" href="<%=bundle.bundlePath()%>common/resources/images/KDappleIcon.png"/> 
+<link rel="apple-touch-startup-image" href="<%=bundle.bundlePath()%>common/resources/images/logo-KineticData.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport" content = "width = device-width, initial-scale = 2.3, minimum-scale = 1, maximum-scale = 5" />
 <%--
     Load the common bundle styling.  This will typically be loaded in the HEAD
     element before any package specific CSS, so it may be overriden with package
