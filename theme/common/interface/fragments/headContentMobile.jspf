@@ -25,6 +25,15 @@
 <link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/jquery-ui-1.9.0.custom.css" />
 <link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/commonMobile.css" />
 <link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/ajaxLogin.css" />
+<%--
+    Add Apple App metadata and icons. This will allow iPad and iPhone users
+    to save the website as an apple app.
+--%>
+<link rel="apple-touch-icon" href="<%=bundle.bundlePath()%>common/resources/images/KDappleIcon.png"/> 
+<link rel="apple-touch-startup-image" href="<%=bundle.bundlePath()%>common/resources/images/logo-KineticData.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport" content = "width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 5" />
 
 <%-- 
     Initialize the BUNDLE javascript object.  This object is used to store the
