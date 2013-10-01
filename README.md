@@ -12,20 +12,18 @@ Parent path:
 .../apache-tomcat-X.X.XX-sr/webapps/kinetic/themes
 
 ### Catalog
-1. Unzip the catalog.zip file 
+1. Open the setup/AIR_Catalog/config.rb file in a text editor
 
-2. Open the config.rb file in a text editor
+2. Edit the “CATALOG_NAME” variable with the name you want to call your catalog. Use underscores or dashes instead of spaces.
 
-3. Edit the “CATALOG_NAME” variable with the name you want to call your catalog. Use underscores or dashes instead of spaces.
+3. Edit the “THEMES_BASE” with the path to the bundle directory
 
-4. Edit the “THEMES_BASE” with the path to the bundle directory
-
-5. Using Kurl (http://community.kineticdata.com/10_Kinetic_Request/KURL/02_Get_Started), use the following command to start your catalog import by replacing the text, "path-to-kurl-catalog-directory", with the path (from your kurl directory) to your unzipped kurl catalog files:
+4. Using Kurl (http://community.kineticdata.com/10_Kinetic_Request/KURL/02_Get_Started), use the following command to start your catalog import by replacing the text, "path-to-kurl-catalog-directory", with the path (from your kurl directory) to your unzipped kurl catalog files:
 ~~~~
 java -jar kurl.jar -action=build_catalog -directory=path-to-kurl-catalog-directory
 ~~~~
 
-6. When the import is complete, verify that the catalog is visible in Remedy and all the service items are imported.
+5. When the import is complete, verify that the catalog is visible in Remedy and all the service items are imported.
     * Catalog Login
     * Catalog Portal
     * Profile
@@ -33,8 +31,8 @@ java -jar kurl.jar -action=build_catalog -directory=path-to-kurl-catalog-directo
     * Submission Details
     * Submissions
 
-7. In the bundle directory open the your-theme-name/common/config/config.jspf file. Update each line where the word “AIR” is with the name of your catalog then save the file.
+6. In the bundle directory open the your-theme-name/common/config/config.jspf file. Update each line where the word “AIR” is with the name of your catalog then save the file.
 
-8. Verify configuration by opening the web site in a browser:  
+7. Verify configuration by opening the web site in a browser:  
 http://_your-web-server_/kinetic/DisplayPage?name=_your-catalog-name_
 
