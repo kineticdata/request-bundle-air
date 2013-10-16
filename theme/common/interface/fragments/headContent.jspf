@@ -28,6 +28,15 @@
 <!--[if IE 6]><link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/common.ie6.css" /><![endif]-->
 <!--[if IE 7]><link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/common.ie7.css" /><![endif]-->
 <!--[if IE 8]><link rel="stylesheet" type="text/css" href="<%=bundle.bundlePath()%>common/resources/css/common.ie8.css" /><![endif]-->
+<%--
+    Add Apple App metadata and icons. This will allow iPad and iPhone users
+    to save the website as an apple app.
+--%>
+<link rel="apple-touch-icon" href="<%=bundle.bundlePath()%>common/resources/images/KDappleIcon.png"/> 
+<link rel="apple-touch-startup-image" href="<%=bundle.bundlePath()%>common/resources/images/logo-KineticData.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport" content = "width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 5" />
 
 <%-- 
     Initialize the BUNDLE javascript object.  This object is used to store the
