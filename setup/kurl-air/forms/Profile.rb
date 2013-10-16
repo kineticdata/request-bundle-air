@@ -4,16 +4,18 @@ service_item "Profile" do
   catalog CATALOG_NAME
   categories ""
   type "Service Item"
-  description "\n    <div class=\"serviceItemDescriptionHeader rounded6\" >Profile</div>\n    <div id=\"descriptionContent\" class=\"descriptionContent\">                     \n      <div style=\"float:right;padding-left:5px;padding-bottom:5px;\">\n        <img src=\"/kinetic/themes/acme/images/primo_icons/PNG/64x64/user.png\"/>\n      </div>\n      <br/>\n      Update personal information.<br/>\n    </div>\n    <div style=\"clear:both;\"> </div>\n  "
+  description nil
   display_page DISPLAY_PAGE
   display_name "#{DISPLAY_NAME_FOR_URL}_UserProfile"
   web_server WEB_SERVER
+  authentication :template, :template_name => "Catalog Login"
+  form_type :launcher
   page "Initial Page",
     :contents,
     :horizontal_buttons,
     :submit_button_value => "Submit" do
     text "Service Item Description", "    <h2 class=\"serviceItemDescriptionHeader \" >Profile</h2>\n    <div id=\"descriptionContent\" class=\"descriptionContent\">                     \n      <div style=\"float:right;padding-left:5px;padding-bottom:5px;\">\n        <img src=\"\"/>\n      </div>\n      <br/>\n      Update personal information.<br/>\n    </div>\n    <div style=\"clear:both;\"> </div>"
-    text "Gravatar", "<div id=\"gravatar\" style=\"float:right;\"></div>\n<script type=\"text/javascript\">\njQuery(document).ready(function() {\ngravatar($.trim($('.email input').val()), '#gravatar');\n});\n</script>"
+    text "Gravatar", "<div id=\"gravatar\" style=\"float:right;\"></div>\n<script type=\"text/javascript\">\njQuery(document).ready(function() {\ngravatar($.trim($('.email input').val()), '#gravatar');\n});\n</script>\n"
     section  "Submitter"
     question "Requester First Name", "First Name", :free_text,
       :required,
@@ -86,6 +88,7 @@ service_item "Profile" do
       :size => "20",
       :rows => "1",
       :field_map_number => "5"
+    text "Mobile Toggle", "<div>View site as <span id=\"mobileToggle\" style=\"font-weight: bold; cursor: pointer; color: blue;\"></span></div>\n<script>\nfunction setCookie(key, value) {\n    var expires = new Date();\n    expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));\n    document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();\n}\n\nfunction getCookie(key) {\n    var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');\n    return keyValue ? keyValue[2] : null;\n}\n\nfunction setToggle(mobileCookie) {\n    if(mobileCookie == 'true'){\n        $('#mobileToggle').text('Desktop');\n        setCookie('mobile',false);\n    }\n    else {\n        $('#mobileToggle').text('Desktop');\n        setCookie('mobile',true);\n    }\n    location.reload();\n}\nvar mobileCookie = getCookie('mobile');\n$('#mobileToggle').text(function(i,text){\n    return mobileCookie === 'true' ? 'Desktop' : 'Mobile';\n});\n\n$('#mobileToggle').on('click',function() {\n    var mobileCookie = getCookie('mobile');\n    setToggle(mobileCookie);\n});\n</script>"
   end
   page "Confirmation Page",
     :confirmation,
