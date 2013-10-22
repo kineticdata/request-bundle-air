@@ -173,7 +173,7 @@ function intializeDataTable(tableParams, groupName, arsUrl) {
         'bServerSide': true,
         'sAjaxSource': arsUrl.getUrl(),
         'sPaginationType': 'full_numbers',
-        'aaSorting': [[1, 'desc']],
+        'aaSorting': [[0, 'desc']],
         /**
          * ColumnDefs has many options for manipulation of column specific data
          * mRender can be used to render column data from json object
