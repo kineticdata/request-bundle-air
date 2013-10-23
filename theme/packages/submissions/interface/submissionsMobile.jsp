@@ -8,10 +8,14 @@
         <%@include file="../../../common/interface/fragments/headContentMobile.jspf"%>
 
         <!-- Page Stylesheets -->
+        <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/jquery.qtip.css" type="text/css" />
+        <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/footable.core.css" type="text/css" />
         <link rel="stylesheet" href="<%= bundle.packagePath()%>resources/css/submissionsMobile.css" type="text/css" />
         <!-- Page Javascript -->
-        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/ArsUrl.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/moment.min.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/footable.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/jquery.qtip.min.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/jquery.submissionsTable.js"></script>
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/submissionsMobile.js"></script>
     </head>
     <body>
@@ -29,9 +33,9 @@
                         Loading Results
                     </div>
                     <%-- SUBMISSIONS VIEW --%>
-                    <div id="submissionsTable" class="hidden">
-                        <table class="tableContainer responsive hidden" id="tableContainerRequestsOpen"></table>
+                    <div class="results hidden">
                     </div>
+                    <div class="results-message hidden"></div>
                 </section>
             </div>
         </div> 

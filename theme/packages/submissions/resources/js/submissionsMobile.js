@@ -1,103 +1,24 @@
-// Load table on Page load
-$(document).ready(function() {
-    var loader = '#loader';
-    // Instantiate object
-    var arsUrl = new ArsUrl();
-
+$(function() {
+    // Get query string parameters into an object
     var urlParameters = getUrlParameters();
-    if(!urlParameters.status) {
-        urlParameters.status = "Requests Open";
-    }
-    if(BUNDLE['config'][urlParameters.status+' Count'] > 0) {
-        // Initialize datatables
-        intializeDataTable(tableParams, urlParameters.status, arsUrl);
-        $(tableParams[urlParameters.status].container).show();
-    } else {
-        $(loader).hide();
-        $('#main').after('<h3 style="margin: 10px 0 0 0; text-align: center;">There Are No '+ urlParameters.status+'</h3>');
-    }
-
-    $('#status').text(urlParameters.status+' '+$('#status').text());
+    // Determine if the status is a real status
+    var statusCheck = true;
+    $.each(tableParams, function(index) { 
+        if(urlParameters.status === index) {
+            statusCheck = false;
+            return false;
+        }
+    });
+    if(statusCheck) { urlParameters.status = 'Requests Open'; }
+    // Breadcrumb
+    $('#catalogBreadCrumbs').append('<li class="breadCrumb">' + urlParameters.status + '</li>');
+    // Get table specific properties
+    var table = tableParams[urlParameters.status];
+    // How many entries to show on page load
+    entryOptionSelected = 5;
+    // Start table
+    initialize(table, urlParameters.status, entryOptionSelected);
 });
-
-/**
- * Define form defintions
- */
-formDefinitionDefault = {
-form: 'KS_SRV_CustomerSurvey_base', 
-fields: {
-        'Request Id'   : '1',
-        'Submitted'    : '700001285',
-        'Service Item' : '700001000',
-        'Status'       : '700002400',
-        'Instance Id'  : '179'
-    }
-};
-
-/**
- * Define column defintions
- */
-columnDefinitionsDefault = [
-    {
-        'aTargets': [0],
-        'sTitle': 'Request ID',
-        'iDataSort': formDefinitionDefault.fields['Request Id'],
-        'mRender': function (data, type, full) {
-            return full[0];                        
-        }                 
-    },
-    {
-        'aTargets': [1],
-        'sTitle': 'Service Item',
-        'iDataSort': formDefinitionDefault.fields['Service Item'],
-        'mRender': function (data, type, full) {
-            return full[2];                   
-        }                 
-    },
-    {
-        'aTargets': [2],
-        'sTitle': 'Status',
-        'iDataSort': formDefinitionDefault.fields['Status'],
-        'mRender': function (data, type, full) {
-            return full[3];                    
-        }                 
-    }
-];
-
-/**
- * Default row callback, which will add csrv as a data attribute to each row
- */
-function defaultRowCallback(table, nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-    $(nRow).data('csrv', aData[4]);
-}
-
-/**
- * Default complete callback, which will bind a unobtrusive jQuery live on click event.
- * It uses the data attribute csrv as part of the url param in the link
- */
-function defaultCompleteCallback(table, oSettings, json) {
-    // Remove all delegated click handlers from all rows
-    $('#testDataTable tbody').off('click', 'tr');
-    // Click Event
-    $('#testDataTable tbody').on('click', 'tr', function() {
-        window.open(BUNDLE.applicationPath + 'DisplayPage?csrv=' + $(this).data('csrv'));
-    });
-}
-
-/**
- * Custom complete callback, which will bind a unobtrusive jQuery live on click event.
- * It uses the data attribute csrv as part of the url param in the link
- */
-function requestsOpenClosedCompleteCallback(table, oSettings, json) {
-    // Remove all delegated click handlers from all rows
-    $('#tableContainerRequestsOpen tbody').off('click', 'tr');
-    // Click Event
-    $('#tableContainerRequestsOpen tbody').on('click', 'tr', function() {
-        window.open(BUNDLE.config['submissionDetailsUrl']+'&submissionId=' + $(this).data('csrv'));
-    });
-    $(loader).hide();
-    $(table.container).wrap('<div class="scrollable" />');
-}
 
 /**
  * Define the common table options and callbacks
@@ -105,97 +26,249 @@ function requestsOpenClosedCompleteCallback(table, oSettings, json) {
 tableParams = { 
     // Define table specific properties
     'Requests Open': {
-        container: '#tableContainerRequestsOpen',
-        qualification: 'Requests Open',
-        formDefinition: formDefinitionDefault,
-        columnDefinitions: columnDefinitionsDefault,
+        displayFields: {
+            'Originating Request Id': 'Request ID',
+            'Submitted': 'Submitted',
+            'Originating Name': 'Service Item',
+            'Display Status': 'Status'
+        },
+        sortField: 'Submitted',
         rowCallback: defaultRowCallback,
-        completeCallback: requestsOpenClosedCompleteCallback
+        columnCallback: defaultColumnCallback,
+        completeCallback: defaultCompleteCallback
     },
     'Requests Closed': {
-        container: '#tableContainerRequestsClosed',
-        qualification: 'Requests Closed',
-        formDefinition: formDefinitionDefault,
-        columnDefinitions: columnDefinitionsDefault,
+        displayFields: {
+            'Originating Request Id': 'Request ID',
+            'Closed': 'Closed',
+            'Originating Name': 'Service Item',
+            'Display Status': 'Status'
+        },
+        sortField: 'Closed',
         rowCallback: defaultRowCallback,
-        completeCallback: requestsOpenClosedCompleteCallback
+        columnCallback: defaultColumnCallback,
+        completeCallback: defaultCompleteCallback
     },
     'Requests Parked': {
-        container: '#tableContainerRequestsParked',
-        qualification: 'Requests Parked',
-        formDefinition: formDefinitionDefault,
-        columnDefinitions: columnDefinitionsDefault,
+        displayFields: {
+            'Originating Request Id': 'Request ID',
+            'Modified': 'Started',
+            'Originating Name': 'Service Item',
+            'Display Status': 'Status'
+        },
+        sortField: 'Modified',
         rowCallback: defaultRowCallback,
-        completeCallback: defaultCompleteCallback
+        columnCallback: defaultColumnCallback,
+        completeCallback: requestsParkedCompleteCallback
     },
     'Approvals Pending': {
-        container: '#tableContainerApprovalsPending',
-        qualification: 'Approvals Pending',
-        formDefinition: formDefinitionDefault,
-        columnDefinitions: columnDefinitionsDefault,
+        displayFields: {
+            'Originating Request Id': 'Request ID',
+            'Sent': 'Sent',
+            'Originating Name': 'Service Item',
+            'Display Status': 'Status'
+        },
+        sortField: 'Sent',
         rowCallback: defaultRowCallback,
-        completeCallback: defaultCompleteCallback
+        columnCallback: defaultColumnCallback,
+        completeCallback: approvalsPendingCompleteCallback
     },
     'Approvals Completed': {
-        container: '#tableContainerApprovalsCompleted',
-        qualification: 'Approvals Completed',
-        formDefinition: formDefinitionDefault,
-        columnDefinitions: columnDefinitionsDefault,
+        displayFields: {
+            'Originating Request Id': 'Request ID',
+            'Submitted': 'Submitted',
+            'Originating Name': 'Service Item',
+            'Display Status': 'Status'
+        },
+        sortField: 'Submitted',
+        rowCallback: defaultRowCallback,
+        columnCallback: defaultColumnCallback,
+        completeCallback: defaultCompleteCallback
     }
 };
 
-/**
- * Data tables
+/*
+ * Default row callback
  */
-function intializeDataTable(tableParams, groupName, arsUrl) {
-    // Get table specific properties
-    var table = tableParams[groupName];
-    // Fluent interface to set properties and build url
-    arsUrl.setForm(table.formDefinition.form)                 
-            .setFields(table.formDefinition.fields)
-            .setFieldIds()
-            .setQualification(table.qualification)
-            .setUrl(BUNDLE.packagePath + 'interface/callbacks/dataTablesSubmissions.json.jsp');
-        
-    // Datatable
-    $(table.container).dataTable({
-        'bPaginate': true,
-        'bSort': true,
-        'bLengthChange': false,
-        'bInfo': false,
-        'bDestroy': true,
-        'bFilter': false,
-        'iDisplayStart': 0,
-        'iDisplayLength': 5,
-        'bJQueryUI': true,
-        'sAjaxDataProp': 'aaData',
-        'bProcessing': true,
-        'bServerSide': true,
-        'sAjaxSource': arsUrl.getUrl(),
-        'sPaginationType': 'full_numbers',
-        'aaSorting': [[0, 'desc']],
-        /**
-         * ColumnDefs has many options for manipulation of column specific data
-         * mRender can be used to render column data from json object
-         */
-        'aoColumnDefs': table.columnDefinitions,
-        'fnServerData': function (sSource, aoData, fnCallback, oSettings) { 
-            oSettings.jqXHR = BUNDLE.ajax({
-              'dataType': 'json',
-              'type': 'get',
-              'url': sSource,
-              'data': aoData,
-              'success': fnCallback
+function defaultRowCallback(tr, value, index) {
+    // This is used to create new links for the row dropdown
+    tr.addClass('new');
+    tr.data('Originating Id', value['Originating Id']);
+    tr.data('Id', value['Id']);
+}
+
+/*
+ * Default column callback
+ */
+function defaultColumnCallback(td, value, fieldname, label) {
+    // Note::jQuery data doesn't work on td
+    if(fieldname === 'Sent' || fieldname === 'Submitted' || fieldname === 'Closed' || fieldname === 'Modified') {
+        td.attr('data-timestamp', ((value !== null) ? moment(value).format('YYYY-MM-DD hh:mm:ss a') : ""))
+        .text(
+            moment(td.text()).fromNow()
+        )
+    }
+}
+
+/**
+ * Default Complete callback
+ */
+function defaultCompleteCallback() {
+    // Create Review and activity details links
+    this.submissionsTable.on('click', 'table tbody tr.new', function(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        // Prevents recreation of link below since onclick event looks for tr.new
+        $(this).removeClass('new');
+        $(this).next('tr.footable-row-detail')
+            .find('div.footable-row-detail-inner')
+            .append(
+                $('<div>').addClass('footable-row-detail-row').append(
+                    $('<a>').addClass('requests view-activity-details')
+                        .attr('href', 'javascript:void()')
+                        .attr('data-submission-id', $(this).data('Originating Id'))
+                        .append('View Activity Details')
+                )
+            ).append(
+                $('<div>').addClass('footable-row-detail-row').append(
+                    $('<a>').addClass('requests review')
+                        .attr('href', 'javascript:void()')
+                        .attr('data-submission-id', $(this).data('Originating Id'))
+                        .append('View Submitted Form')
+                )
+            ); 
+    });
+    // Unobstrusive live on click event for view activity details
+    this.submissionsTable.on('click touchstart', 'a.view-activity-details', function(event) {
+        // Prevent default action.
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        window.location = BUNDLE.config['submissionDetailsUrl'] + '&submissionId=' + $(this).data('submission-id');
+    });
+
+    // Unobstrusive live on click event for review request
+    this.submissionsTable.on('click touchstart', 'a.review', function(event) {
+        // Prevent default action.
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        window.location = BUNDLE.applicationPath + 'ReviewRequest?excludeByName=Review%20Page&csrv=' + $(this).data('submission-id');
+    });
+}
+
+/**
+ * Complete callback for parked requests
+ */
+function requestsParkedCompleteCallback() {
+    // Unobstrusive live on click event for complete form
+    this.submissionsTable.on('click touchstart', 'a.complete-form', function(event) {
+        // Prevent default action.
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        window.location = BUNDLE.applicationPath + 'DisplayPage?csrv=' + $(this).data('submission-id') + '&return=yes';
+    });
+    // Create complete form link
+    this.submissionsTable.on('click', 'table tbody tr.new', function(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        // Prevents recreation of link below since onclick event looks for tr.new
+        $(this).removeClass('new');
+        $(this).next('tr.footable-row-detail')
+            .find('div.footable-row-detail-inner')
+            .append(
+                $('<div>').addClass('footable-row-detail-row').append(
+                    $('<a>').addClass('requests complete-form')
+                        .attr('href', 'javascript:void()')
+                        .attr('data-submission-id', $(this).data('Originating Id'))
+                        .append('Complete Form')
+                )
+            ); 
+    });
+}
+
+/**
+ * Complete callback for pending requests
+ */
+function approvalsPendingCompleteCallback() {
+    // Unobstrusive live on click event for complete form
+    this.submissionsTable.on('click touchstart', 'a.complete-approval', function(event) {
+        // Prevent default action.
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        window.location = BUNDLE.applicationPath + 'DisplayPage?csrv=' + $(this).data('submission-id');
+    });
+    // Create complete approval link
+    this.submissionsTable.on('click', 'table tbody tr.new', function(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        // Prevents recreation of link below since onclick event looks for tr.new
+        $(this).removeClass('new');
+        $(this).next('tr.footable-row-detail')
+            .find('div.footable-row-detail-inner')
+            .append(
+                $('<div>').addClass('footable-row-detail-row').append(
+                    $('<a>').addClass('requests complete-approval')
+                        .attr('href', 'javascript:void()')
+                        .attr('data-submission-id', $(this).data('Id'))
+                        .append('Complete Approval')
+                )
+            ); 
+    });
+}
+
+function initialize(table, status, entryOptionSelected) {
+    var loader = $('div#loader');
+    var responseMessage = $('div.results-message');
+    // Start list
+    $('div.results').submissionsTable({
+        displayFields: table.displayFields,
+        range: 3,
+        pagination: true,
+        entryOptionSelected: entryOptionSelected,
+        entryOptions: [5, 10, 20, 50, 100],
+        entries: true,
+        info: true,
+        sortOrder: 'DESC',
+        serverSidePagination: true,
+        sortOrderField: table.sortField,
+        dataSource: function(limit, index, sortOrder, sortOrderField) {
+            var widget = this;
+            // Execute the ajax request.
+            BUNDLE.ajax({
+                dataType: 'json',
+                cache: false,
+                type: 'get',
+                url: BUNDLE.packagePath + 'interface/callbacks/submissions.json.jsp?qualification=' + status + '&offset=' + index + '&limit=' + limit + '&orderField=' + sortOrderField + '&order=' + sortOrder,
+                beforeSend: function(jqXHR, settings) {
+                    widget.element.hide();
+                    responseMessage.empty();
+                    loader.show();
+                },
+                success: function(data, textStatus, jqXHR) {
+                    loader.hide();
+                    if(data.count > 0) {
+                        widget.buildResultSet(data.data, data.count);
+                        $('h3').hide();
+                        widget.submissionsTable.show();
+                    } else {
+                        $('section.container nav.submissions-navigation').show();
+                        responseMessage.html('<h3>There Are No ' + status + '</h3>').show();
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    loader.hide();
+                    responseMessage.html(errorThrown).show();
+                }
             });
         },
-        'fnRowCallback': function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-            table.rowCallback(table, nRow, aData, iDisplayIndex, iDisplayIndexFull);
-        },
-        'fnInitComplete': function(oSettings, json) {
-            table.completeCallback(table, oSettings, json);
-            $(loader).hide();
-            $('#submissionsTable').fadeIn();
-            $(table.container).show();
+        rowCallback: function(tr, value, index) { table.rowCallback.call(this, tr, value, index); },
+        columnCallback: function(td, value, fieldname, label) { table.columnCallback.call(this, td, value, fieldname, label); },
+        completeCallback: function() { 
+            // Foo tables ui
+            this.table.find('thead tr th:nth-child(3)').attr('data-hide', 'phone,tablet');
+            this.table.find('thead tr th:nth-child(4)').attr('data-hide', 'phone,tablet');
+            this.table.footable();
+            this.table.trigger('footable_initialize');
+            table.completeCallback.call(this); 
         }
     });
 }

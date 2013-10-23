@@ -20,7 +20,7 @@
         <ul id="submissionNavigation">
             <% for (String groupName : submissionGroups.keySet()) { %>
                 <%-- Count the number of submissions that match the current query --%>
-                <% Integer count = ArsBase.count(context, "KS_SRV_CustomerSurvey_base", submissionGroups.get(groupName)); %>
+                <% Integer count = ArsBase.count(context, "KS_SRV_CustomerSurvey", submissionGroups.get(groupName)); %>
                 <%-- If there are more than 0 records matching, display a link to the table. --%>
                 <% if (count > 0) { %>
                     <% if(request.getParameter("status") != null && request.getParameter("status").equals(groupName)) {%>
