@@ -23,7 +23,7 @@ $(function() {
 /**
  * Define the common table options and callbacks
  */
-tableParams = { 
+var tableParams = { 
     // Define table specific properties
     'Requests Open': {
         displayFields: {
@@ -115,7 +115,7 @@ function defaultColumnCallback(td, value, fieldname, label) {
  */
 function defaultCompleteCallback() {
     // Create Review and activity details links
-    this.submissionsTable.on('click', 'table tbody tr.new', function(event) {
+    this.consoleTable.on('click', 'table tbody tr.new', function(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
         // Prevents recreation of link below since onclick event looks for tr.new
@@ -139,7 +139,7 @@ function defaultCompleteCallback() {
             ); 
     });
     // Unobstrusive live on click event for view activity details
-    this.submissionsTable.on('click touchstart', 'a.view-activity-details', function(event) {
+    this.consoleTable.on('click touchstart', 'a.view-activity-details', function(event) {
         // Prevent default action.
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -147,7 +147,7 @@ function defaultCompleteCallback() {
     });
 
     // Unobstrusive live on click event for review request
-    this.submissionsTable.on('click touchstart', 'a.review', function(event) {
+    this.consoleTable.on('click touchstart', 'a.review', function(event) {
         // Prevent default action.
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -160,14 +160,14 @@ function defaultCompleteCallback() {
  */
 function requestsParkedCompleteCallback() {
     // Unobstrusive live on click event for complete form
-    this.submissionsTable.on('click touchstart', 'a.complete-form', function(event) {
+    this.consoleTable.on('click touchstart', 'a.complete-form', function(event) {
         // Prevent default action.
         event.preventDefault();
         event.stopImmediatePropagation();
         window.location = BUNDLE.applicationPath + 'DisplayPage?csrv=' + $(this).data('submission-id') + '&return=yes';
     });
     // Create complete form link
-    this.submissionsTable.on('click', 'table tbody tr.new', function(event) {
+    this.consoleTable.on('click', 'table tbody tr.new', function(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
         // Prevents recreation of link below since onclick event looks for tr.new
@@ -190,14 +190,14 @@ function requestsParkedCompleteCallback() {
  */
 function approvalsPendingCompleteCallback() {
     // Unobstrusive live on click event for complete form
-    this.submissionsTable.on('click touchstart', 'a.complete-approval', function(event) {
+    this.consoleTable.on('click touchstart', 'a.complete-approval', function(event) {
         // Prevent default action.
         event.preventDefault();
         event.stopImmediatePropagation();
         window.location = BUNDLE.applicationPath + 'DisplayPage?csrv=' + $(this).data('submission-id');
     });
     // Create complete approval link
-    this.submissionsTable.on('click', 'table tbody tr.new', function(event) {
+    this.consoleTable.on('click', 'table tbody tr.new', function(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
         // Prevents recreation of link below since onclick event looks for tr.new
@@ -219,7 +219,7 @@ function initialize(table, status, entryOptionSelected) {
     var loader = $('div#loader');
     var responseMessage = $('div.results-message');
     // Start list
-    $('div.results').submissionsTable({
+    $('div.results').consoleTable({
         displayFields: table.displayFields,
         range: 3,
         pagination: true,
@@ -248,7 +248,7 @@ function initialize(table, status, entryOptionSelected) {
                     if(data.count > 0) {
                         widget.buildResultSet(data.data, data.count);
                         $('h3').hide();
-                        widget.submissionsTable.show();
+                        widget.consoleTable.show();
                     } else {
                         $('section.container nav.submissions-navigation').show();
                         responseMessage.html('<h3>There Are No ' + status + '</h3>').show();

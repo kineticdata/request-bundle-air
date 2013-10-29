@@ -9,8 +9,8 @@
            <input id="searchInput" class="input-large" type="text" name="q" value="" />
            <!-- span deals with button floating incorrectly next to input in ie 7 fail -->
             <span>
-                <button id="searchButton" class="icon-search" type="submit"></button>
-            <span>
+                <button id="searchButton" class="fa fa-search" type="submit"></button>
+            </span>
         </p>
     </form>
     <%-- SUBMISSION TABLE LINKS --%>

@@ -15,47 +15,50 @@
     </head>
     <body>
         <div class="container">
-        <%@include file="../../../common/interface/fragments/contentHeaderMobile.jspf"%>
-            <div class="wrapper clearfix" >
-                <!-- Breadcrumbs Begins -->
-                <nav class="breadcrumb">
-                    <a href="<%= bundle.getProperty("catalogUrl")%>">
-                        Catalog
-                    </a> /
-                </nav>
-                <!-- Breadcrumbs End -->
-                <section id="sidebar" class="catalog clearfix">
-                    <nav class="catalog-list">
-                        <div class="menuContainer" id="catalogMenu">
-                            <%-- BREADCRUMBS VIEW --%>
-                            <ul id="breadcrumbs">
-                                <li class="breadcrumb" data-id="root" data-name="root">
-                                </li>
-                            </ul>
-                            <%-- TEMPLATES VIEW --%>
-                            <ul id="templatesNav">
-                            </ul>
-                            <%-- CATAGORIES VIEW --%>
-                            <ul id="categoriesNav">
-                                <% for (Category category : catalog.getRootCategories(context)) {%>
-                                    <% if (category.hasTemplates()) { %>
-                                        <li data-id="<%= category.getId()%>" data-name="<%= category.getName()%>">
-                                            <a class="arrow" href="">
-                                                <%= category.getName()%>
-                                            </a>
-                                        </li>
-                                    <%}%>
-                                <%}%>
-                            </ul>
-                            <%-- TEMPLATE PREVIEW --%>
-                            <div id="templatePreview">
-                            </div>
-                        </div>
+            <%@include file="../../../common/interface/fragments/sideNavigationMobile.jspf"%>
+            <div id="mobile-slide" data-target="nav-slide">
+                <%@include file="../../../common/interface/fragments/contentHeaderMobile.jspf"%>
+                <div class="wrapper clearfix">
+                    <!-- Breadcrumbs Begins -->
+                    <nav class="breadcrumb">
+                        <a href="<%= bundle.getProperty("catalogUrl")%>">
+                            Catalog
+                        </a> /
                     </nav>
-                </section>
+                    <!-- Breadcrumbs End -->
+                    <section id="sidebar" class="catalog clearfix">
+                        <nav class="catalog-list">
+                            <div class="menuContainer" id="catalogMenu">
+                                <%-- BREADCRUMBS VIEW --%>
+                                <ul id="breadcrumbs">
+                                    <li class="breadcrumb" data-id="root" data-name="root">
+                                    </li>
+                                </ul>
+                                <%-- TEMPLATES VIEW --%>
+                                <ul id="templatesNav">
+                                </ul>
+                                <%-- CATAGORIES VIEW --%>
+                                <ul id="categoriesNav">
+                                    <% for (Category category : catalog.getRootCategories(context)) {%>
+                                        <% if (category.hasTemplates()) { %>
+                                            <li data-id="<%= category.getId()%>" data-name="<%= category.getName()%>">
+                                                <a class="arrow" href="">
+                                                    <%= category.getName()%>
+                                                </a>
+                                            </li>
+                                        <%}%>
+                                    <%}%>
+                                </ul>
+                                <%-- TEMPLATE PREVIEW --%>
+                                <div id="templatePreview">
+                                </div>
+                            </div>
+                        </nav>
+                    </section>
+                </div>
+                <%@include file="../../../common/interface/fragments/contentFooterMobile.jspf"%>
             </div>
         </div>
-        <%@include file="../../../common/interface/fragments/contentFooterMobile.jspf"%>
         <%-- ROOT CATEGORIES DATA --%>
         <ul id="rootCategories" class="hidden">
             <% for (Category category : catalog.getRootCategories(context)) {%>

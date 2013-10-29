@@ -27,35 +27,6 @@
                                 <img alt="<%= bundle.getProperty("companyName") %>" class="logoHeader" src="<%= bundle.bundlePath()%>common/resources/images/logo.png" >
                             </a>
                         </div>
-                        <!-- Account Menu -->
-                        <nav class="clearfix">
-                            <ul class="nav" role="navigation">
-                                <li class="dropdown">
-                                    <a href="#" id="user-menu" class="btn menu dropdown-toggle" role="button" data-toggle="dropdown" title="Open / Close Menu">
-                                        Menu<span></span>
-                                    </a>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="user-menu">
-                                        <% if (bundle.getProperty("homeUrl") != null ) {%>
-                                            <li>
-                                                <a href="<%= bundle.getProperty("catalogHome")%>">
-                                                    Home
-                                                </a>
-                                            </li>
-                                            <li class="divider"></li>
-                                        <% } %>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <form method="post" action="<%= bundle.applicationPath()%>DisplayPage?<%= request.getQueryString()%>">
-                                                <label>
-                                                    <input type="checkbox" name="mobile" value="false" />
-                                                    Desktop
-                                                </label>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </nav>
                     </div>
                 </div>
             </header>

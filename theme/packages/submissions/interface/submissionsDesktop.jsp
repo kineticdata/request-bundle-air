@@ -14,7 +14,7 @@
         <!-- Page Javascript -->
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/moment.min.js"></script>
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/jquery.qtip.min.js"></script>
-        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/jquery.submissionsTable.js"></script>
+        <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/jquery.consoleTable.js"></script>
         <script type="text/javascript" src="<%=bundle.packagePath()%>resources/js/submissionsDesktop.js"></script>
     </head>
     <body>

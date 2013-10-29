@@ -1,15 +1,15 @@
 /**
- * jQuery OSC table widget
+ * jQuery Kinetic Data console table widget
  */
 (function($) {
-    $.widget('custom.submissionsTable', {
+    $.widget('custom.consoleTable', {
         // Default opitons
         options: {
             entryOptionSelected: 5,
             entryOptions: [5, 10, 50, 100],
             page: 1,
             total: 0,
-            range: 5,
+            paginationPageRange: 5,
             resultsPerPage: 0,
             entries: true,
             serverSidePagination: true
@@ -37,7 +37,7 @@
             widget.information = $('<div>').addClass('information');
             widget.pagination = $('<nav>').addClass('pagination');
             widget.header = $('<div>').addClass('header');
-            widget.submissionsTable = $('<div>').addClass('submissions')
+            widget.consoleTable = $('<div>').addClass('console')
                 .append(widget.header.append(widget.refresh));
             if(widget.options.entries) {
                 widget.entriesSelection = $('<div>').addClass('entries-selection')
@@ -47,14 +47,14 @@
                 widget.header.prepend(widget.entriesSelection);
                     
             }
-            widget.submissionsTable.append(widget.table)
+            widget.consoleTable.append(widget.table)
                 .append(
                     $('<div>').addClass('footer')
                         .append(widget.information)
                         .append(widget.pagination)
                 );
             // Add html to selector
-            widget.element.html(widget.submissionsTable);
+            widget.element.html(widget.consoleTable);
             widget._createEvents();
             widget._makeRequest(1, widget.select.val());
         },
@@ -243,64 +243,76 @@
         _getTotalPages: function() {
             return Math.ceil(this.options.total / this.options.resultsPerPage);
         },
-        _buildPaginatationData: function() {  
-            var midRange = this.options.range;
-            startRange = this.options.page - Math.floor(midRange / 2);
-            endRange = this.options.page + Math.floor(midRange / 2);
-            if(startRange <= 0) {
-                endRange += Math.abs(startRange) + 1;
-                startRange = 1;
+        _buildPaginatationData: function() { 
+            var startPage = 1;
+            var currentPage = this.options.page;
+            var endPage = this._getTotalPages();
+            // Assume total pages is less than range
+            var currentPageRange = this._range(1, endPage);
+            // If total pages is greater than range, calculate page range based on current page
+            if(endPage > this.options.paginationPageRange) {
+                // Determine start range
+                var startRange = currentPage - Math.floor(this.options.paginationPageRange / 2);
+                // Determine end range
+                var endRange = currentPage + Math.floor(this.options.paginationPageRange / 2);
+                if(startRange <= 0) {
+                    endRange += Math.abs(startRange) + 1;
+                    startRange = startPage;
+                }
+                if(endRange > endPage) {
+                    startRange -= endRange - endPage;
+                    endRange = endPage;
+                }
+                // Assume range option is odd
+                var offset = 0;
+                // Determine if range is even or odd for building the correct range of page numbers shown
+                if (this.options.paginationPageRange % 2 === 0) { offset = 1; }
+                if(endPage !== endRange) {
+                    endRange = endRange - offset;
+                } else {
+                    startRange = startRange + offset;
+                }
+                // Ensure start range is still 1 or greater
+                if(startRange <= 0) { startRange = startPage; }
+                currentPageRange = this._range(startRange, endRange);
             }
-            if(endRange > this._getTotalPages()) {
-                startRange -= endRange - this._getTotalPages();
-                endRange = this._getTotalPages();
-            }
-            var startPage;
-            var endPage;
             // Initialize object
             var pages = new Object();
             var pageNumbers = new Array();
-            if(this.options.total > 1) {
-                startPage = 1;
-                endPage = this._getTotalPages();
+            if(currentPageRange.length > 1) {
                 // Setup prev
-                if(this.options.page != 1) {
+                if(currentPage !== startPage) {
                     pages['prev'] = new Object({
-                        'page':(this.options.page - 1),
+                        'page':(currentPage - 1),
                         'label':'Prev'
                     });
                 }
-                // Setup link showing first page number if user is not on page 1 and on page 6 or greater
-                if(this.options.page != 1 && this.options.page >= midRange + 1) {
-                    pages['fistPage'] = new Object({
+                // Setup link showing first page if not inside page range
+                if($.inArray(startPage, currentPageRange) === -1) {
+                    pages['firstPage'] = new Object({
                         'page':startPage,
                         'label':startPage + '...'
                     });
                 }
                 // Create page numbers
-                for(var i = 1; i < endPage + 1; i++) {
-                    if ((i >= startRange) && (i <= endRange)) {
-                        pageNumbers[i] = new Object({
-                            'page':i,
-                            'label':i
-                        });
-                    }
-                }
-                if(pageNumbers.length > 2) {
-                    pages['pageNumbers'] = pageNumbers;
-                }
-                
-                // Setup link showing last page number if user is not on end page and 5 pages or less from end page
-                if(this.options.page != endPage && this.options.page <= (endPage - midRange)) {
+                $.each(currentPageRange, function(index, value) {
+                    pageNumbers[index] = new Object({
+                        'page':value,
+                        'label':value
+                    });
+                });
+                pages['pageRange'] = pageNumbers;
+                // Setup link showing last page if not inside page range
+                if($.inArray(endPage, currentPageRange) === -1) {
                     pages['lastPage'] = new Object({
                         'page':endPage,
                         'label':'... ' + endPage
                     });
                 }
                 // Setup next
-                if(this.options.page != endPage) {
+                if(currentPage !== endPage) {
                     pages['next'] = new Object({
-                        'page':this.options.page + 1,
+                        'page':currentPage + 1,
                         'label':'Next'
                     });
                 }
@@ -309,40 +321,46 @@
             }
             return new Object({'pages':pages});
         },
+        _range: function(start, end) {
+            var array = new Array();
+            for(var i = start; i <= end; i++) {
+                array.push(i);
+            }
+            return array;
+        },
         _buildHtmlPaginatationList: function() {
+            // Set current object context to use inside jquery objects
+            var widget = this;
             var paginationData = this._buildPaginatationData();
             var paginationList = $('<ul>').addClass('unstyled links');
-            for(var key in paginationData.pages) {
-                if(key === 'pageNumbers') {
-                    for(var i = 1; i < paginationData.pages[key].length; i++) {
-                        // Omit Undefined
-                        if(typeof paginationData.pages[key][i] !== 'undefined') {
-                            var li = $('<li>')
+            $.each(paginationData.pages, function(index, value) {
+                if(index === 'pageRange') {
+                    $.each(value, function(index, value) {
+                        var li = $('<li>')
                                 .append(
                                     $('<a>').attr('href', 'javascript(void)')
-                                    .data('page', paginationData.pages[key][i].page)
-                                    .text(paginationData.pages[key][i].label)
+                                    .data('page', value.page)
+                                    .text(value.label)
                                 )
-                            // Create Active class based selected page
-                            if(paginationData.pages[key][i].page === this.options.page) { li.addClass('active'); }
-                            paginationList.append(li);
-                        }
-                    }
+                        // Create Active class based selected page
+                        if(value.page === widget.options.page) { li.addClass('active'); }
+                        paginationList.append(li);
+                    });
                 } else {
                     paginationList.append(
                         $('<li>')
                         .append(
                             $('<a>').attr('href', 'javascript(void)')
-                            .data('page', paginationData.pages[key].page)
-                            .text(paginationData.pages[key].label)
+                            .data('page', value.page)
+                            .text(value.label)
                         )
                     );
                 }
-            }
+            });
             return paginationList;
         },
         _destroy: function() {
-            this.submissionsTable.remove();
+            this.consoleTable.remove();
         }
     });
 })(jQuery);

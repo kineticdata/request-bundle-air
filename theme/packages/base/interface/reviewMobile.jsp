@@ -17,9 +17,14 @@
     </head>
     <body class="loadAllPages_<%=customerSurveyReview.getLoadAllPages()%> review">
         <div class="container">
-            <%@include file="../../../common/interface/fragments/contentHeaderMobile.jspf"%>
-            <%@include file="../../../core/interface/fragments/reviewBodyContent.jspf"%>
+            <%@include file="../../../common/interface/fragments/sideNavigationMobile.jspf"%>
+            <div id="mobile-slide" data-target="nav-slide">
+                <%@include file="../../../common/interface/fragments/contentHeaderMobile.jspf"%>
+                <div class="wrapper clearfix">
+                    <%@include file="../../../core/interface/fragments/reviewBodyContent.jspf"%>
+                </div>
+                <%@include file="../../../common/interface/fragments/contentFooterMobile.jspf"%>
+            </div>
         </div>
-        <%@include file="../../../common/interface/fragments/contentFooterMobile.jspf"%>  
     </body>
 </html>

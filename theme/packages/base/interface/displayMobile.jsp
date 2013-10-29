@@ -20,10 +20,15 @@
     </head>
     <body>
         <div class="container">
-            <%@include file="../../../common/interface/fragments/contentHeaderMobile.jspf"%>
-            <%@include file="../../../core/interface/fragments/displayBodyContent.jspf"%>
-            <div class="clearfix"></div>
+            <%@include file="../../../common/interface/fragments/sideNavigationMobile.jspf"%>
+            <div id="mobile-slide" data-target="nav-slide">
+                <%@include file="../../../common/interface/fragments/contentHeaderMobile.jspf"%>
+                <div class="wrapper clearfix">
+                    <%@include file="../../../core/interface/fragments/displayBodyContent.jspf"%>
+                    <div class="clearfix"></div>
+               </div>
+                <%@include file="../../../common/interface/fragments/contentFooterMobile.jspf"%>
+            </div>
         </div>
-        <%@include file="../../../common/interface/fragments/contentFooterMobile.jspf"%>
     </body>
 </html>

@@ -34,7 +34,7 @@ $(function() {
         // Set new selected option for later
         entryOptionSelected = parseInt($('select.limit').val());
         // Destory current table
-        $('div.results').submissionsTable('destroy');
+        $('div.results').consoleTable('destroy');
         // Get table specific properties
         var table = tableParams[$(this).data('group-name')];
         // Start table
@@ -45,7 +45,7 @@ $(function() {
 /**
  * Define the common table options and callbacks
  */
-tableParams = { 
+var tableParams = { 
     // Define table specific properties
     'Requests Open': {
         displayFields: {
@@ -151,7 +151,7 @@ function defaultColumnCallback(td, value, fieldname, label) {
  */
 function defaultCompleteCallback() {
     // Unobstrusive live click event for view details
-    this.submissionsTable.on('click touchstart', 'table tbody tr', function(event) {
+    this.consoleTable.on('click touchstart', 'table tbody tr', function(event) {
         // Prevent default action.
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -159,7 +159,7 @@ function defaultCompleteCallback() {
     });
 
     // jQuery unobstrusive live on click event for review request
-    this.submissionsTable.on('click touchstart', 'table tbody tr td a.review', function(event) {
+    this.consoleTable.on('click touchstart', 'table tbody tr td a.review', function(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
         window.open(BUNDLE.applicationPath + 'ReviewRequest?excludeByName=Review%20Page&csrv=' + $(this).parents('tr').data('Originating Id'));
@@ -171,7 +171,7 @@ function defaultCompleteCallback() {
  */
 function requestsParkedCompleteCallback() {
     // Unobstrusive live click event for view details
-    this.submissionsTable.on('click touchstart', 'table tbody tr', function(event) {
+    this.consoleTable.on('click touchstart', 'table tbody tr', function(event) {
         // Prevent default action.
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -184,7 +184,7 @@ function requestsParkedCompleteCallback() {
  */
 function approvalsPendingCompleteCallback() {
     // Unobstrusive live click event for view details
-    this.submissionsTable.on('click touchstart', 'table tbody tr', function(event) {
+    this.consoleTable.on('click touchstart', 'table tbody tr', function(event) {
         // Prevent default action.
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -196,9 +196,9 @@ function initialize(table, status, entryOptionSelected) {
     var loader = $('div#loader');
     var responseMessage = $('div.results-message');
     // Start list
-    $('div.results').submissionsTable({
+    $('div.results').consoleTable({
         displayFields: table.displayFields,
-        range: 5,
+        paginationPageRange: 5,
         pagination: true,
         entryOptionSelected: entryOptionSelected,
         entryOptions: [5, 10, 20, 50, 100],
@@ -225,7 +225,7 @@ function initialize(table, status, entryOptionSelected) {
                     if(data.count > 0) {
                         widget.buildResultSet(data.data, data.count);
                         $('h3').hide();
-                        widget.submissionsTable.show();
+                        widget.consoleTable.show()
                     } else {
                         $('section.container nav.submissions-navigation').show();
                         responseMessage.html('<h3>There Are No ' + status + '</h3>').show();

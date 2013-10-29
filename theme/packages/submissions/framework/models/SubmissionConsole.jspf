@@ -1,6 +1,6 @@
 <%!
     /**
-     * Custom submission model to satisfy the requirements of the State submission console
+     * Custom submission model to satisfy the requirements of the submission console
      */
     public static class SubmissionConsole {
         public static final String FORM_NAME = "KS_SRV_CustomerSurvey";
@@ -157,7 +157,11 @@
                 Map.Entry<String, String> mapEntry = (Map.Entry) iterator.next();
                 String fieldAlias = mapEntry.getKey();
                 String fieldId = mapEntry.getValue();
-                builder.append("\"" + fieldAlias + "\":").append(((!entry.getEntryFieldValue(fieldId).equals("")) ? "\"" + entry.getEntryFieldValue(fieldId) + "\"" : null));
+                if(fieldAlias.equals("Requested For")) {
+                    builder.append("\"" + fieldAlias + "\":").append("\"" + this.getFirstName() + " " + this.getLastName() + "\"");
+                } else {
+                    builder.append("\"" + fieldAlias + "\":").append(((!entry.getEntryFieldValue(fieldId).equals("")) ? "\"" + entry.getEntryFieldValue(fieldId) + "\"" : null));
+                }
                 if (iterator.hasNext()) { builder.append(","); }
             }
             builder.append("}");

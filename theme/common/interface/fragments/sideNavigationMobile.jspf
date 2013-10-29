@@ -1,0 +1,54 @@
+<div id="nav-slide" class="slide hidden">
+    <nav class="top">
+        <a class="brand" href="<%= bundle.getProperty("catalogUrl")%>">ACME</a>
+        <% if (context != null) {%>
+            <a class="templateButton" href="<%= bundle.getProperty("logoutUrl")%>">
+                Logout
+            </a>
+        <% } %>
+    </nav>
+    <ul class="dropdown-slide clearfix" data-nav-active=
+    "true">
+       <% if (context != null && bundle.getProperty("profileUrl") != null ) {%>
+            <li class="profile">
+                <a href="<%= bundle.getProperty("profileUrl")%>">
+                    Manage Account
+                </a>
+            </li>
+        <% } %>
+       <% if (bundle.getProperty("homeUrl") != null ) {%>
+            <li>
+                <a href="<%= bundle.getProperty("catalogHome")%>">
+                    Home
+                </a>
+            </li>
+        <% } %>
+        <li class="view-catalog">
+            <a href="<%= bundle.getProperty("catalogUrl")%>">
+                View Catalog
+            </a>
+        </li>
+        <%-- SUBMISSION TABLE LINKS --%>
+        <% if (context != null) { %>
+            <% for (String groupName : submissionGroups.keySet()) { %>
+                <%-- Count the number of submissions that match the current query --%>
+                <% Integer count = ArsBase.count(context, "KS_SRV_CustomerSurvey", submissionGroups.get(groupName)); %>
+                <%-- If there are more than 0 records matching, display a link to the table. --%>
+                <% if (count > 0) { %>
+                    <li>
+                        <% if(request.getParameter("status") != null && request.getParameter("status").equals(groupName)) {%>
+                            <a class="active" data-group-name="<%=groupName%>" href="<%= bundle.getProperty("submissionsUrl")%>&status=<%=groupName%>">
+                                <%=count%>&nbsp;<%=groupName%>
+                            </a>
+                            <div class="arrow-left"></div>
+                        <% } else {%>
+                            <a data-group-name="<%=groupName%>" href="<%= bundle.getProperty("submissionsUrl")%>&status=<%=groupName%>">
+                                <%=count%>&nbsp;<%=groupName%>
+                            </a>
+                        <% }%>
+                    </li>
+                <% }%>
+            <% }%>
+        <% }%>
+    </ul>
+</div>

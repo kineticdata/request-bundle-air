@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    $('li.view-catalog').append(
+        $('<div>').addClass('arrow-left')
+    ).find('a').addClass('active');
     // Local selectors that are used quite a bit
     var breadCrumbsNav = 'ul#breadcrumbs';
     var templatesNav = 'ul#templatesNav';
