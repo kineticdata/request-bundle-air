@@ -50,18 +50,18 @@
                         <li class="template border gradient">
                             <div class="templateName header">
                                 <a href="<%= bundle.applicationPath()%>DisplayPage?srv=<%= matchingTemplates[i].getId()%>">
-                                    <%= CatalogSearch.replaceAll(combinedPattern, matchingTemplates[i].getName())%>
+                                    <%= matchingTemplates[i].getName()%>
                                 </a>
                             </div>
 
-                            <div class="templateDescription"><%= CatalogSearch.replaceAll(combinedPattern, matchingTemplates[i].getDescription())%></div>
+                            <div class="templateDescription"><%= matchingTemplates[i].getDescription()%></div>
                             <div class="attributes">
                                 <% for (String attributeName : searchableAttributes) {%>
                                 <div class="attribute">
                                     <div class="attributeName"><%= attributeName %></div>
                                     <div class="attributeValues">
                                         <% for (String attributeValue : matchingTemplates[i].getTemplateAttributeValues(attributeName)) {%>
-                                        <div class="attributeValue borderRight"><%= CatalogSearch.replaceAll(combinedPattern, attributeValue)%></div>
+                                        <div class="attributeValue borderRight"><%= attributeValue%></div>
                                         <% }%>
                                         <div class="clearfix"></div>
                                     </div>
